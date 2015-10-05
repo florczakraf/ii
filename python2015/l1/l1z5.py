@@ -7,4 +7,5 @@ def tabliczka(x1, x2, y1, y2):
       print('', i * j, end = '')
     print()
 
-tabliczka(3, 5, 2, 4)
+if __name__ == "__main__":
+  tabliczka(3, 5, 2, 4)
