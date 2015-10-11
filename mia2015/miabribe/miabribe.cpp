@@ -15,32 +15,38 @@ int main()
 
   for (int i = 1; i <= n; i++)
     solve(i);
+
+  return 0
 }
 
 void solve(int n)
 {
-  int p, q, bribe = 0, current, * order, min_bribe = 0;
+  int p, q;
   cin >> p >> q;
-  order = new int[q];
+  int cells[102];
+  cells[0] = 0;
+  for (int i = 1; i <= q; i++)
+    cin >> cells[i];
+  cells[q + 1] = p + 1;
+  q += 2;
 
-  for (int i = 0; i < q; i++)
-    cin >> order[i];
+  int arr[200][200];
+  for (int i = 0; i < q - 1; i++)
+    arr[i][i+1] = 0;
 
-  do
+  for (int i = 2; i < q; i++)
   {
-    bool cells[p] = {true};
-    for (int i = 0; i < q; i++)
+    for (int l = 0; i + l < q; l++)
     {
-      int current = order[i] - 1;
-      cells[current] = 0;
-      for (int j = current - 1; j > 0 && cells[j] != 0; j--)
-        bribe++;
-      for (int j = current + 1; j < n && cells[j] != 0; j++)
-        bribe++;
-    }
-    min_bribe = (min_bribe < bribe) ? min_bribe : bribe;
-  }
-  while (next_permutation(order, order + q))
+      int r = l + i;
+      int sol = 99999999;
 
-  cout << "Case #" << n << ": " << min_bribe;
+      for (int j = l + 1; j < r; j++)
+        sol = min(sol, arr[l][j] + arr[j][r] + cells[r] - cells[l] - 2);
+
+      arr[l][r] = sol;
+    }
+  }
+
+  cout << "Case #" << n << ": " << arr[0][q - 1] << '\n';
 }
