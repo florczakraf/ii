@@ -1,0 +1,12 @@
+if true then 4 else 5;;
+if false then 1 else 3.5;;
+4.75 + 2.34;;
+false || "ab" > "cd";;
+if true then ();;
+if false then () else 4;;
+let x = 2 in x^"aa";;
+let y = "abc" in y^y;;
+(fun x -> x.[1]) "abcdef";;
+(fun x -> x) true;;
+let x = [1; 2] in x@x;;
+let rec f f = f + f in f 42;;
