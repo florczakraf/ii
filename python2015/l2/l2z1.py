@@ -34,11 +34,11 @@ def main():
   obj.integer = 1337
 
   
-  print(obj.html())
-  print()
+  #print(obj.html())
+  #print()
   print(obj.html_page())
-  print()
-  print(obj2.html_page())
+  #print()
+  #print(obj2.html_page())
 
 if __name__ == '__main__':
   main()
