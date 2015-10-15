@@ -21,7 +21,7 @@ let take n s =
 
 let fold a f s =
   fun (n: int) ->
-    let acc = ref a
+    let acc = ref a (* ref jest potrzebn *)
     in
       for i = 0 to n do
         acc := f !acc (s i)

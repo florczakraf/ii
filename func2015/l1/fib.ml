@@ -5,8 +5,3 @@ for i = 1 to 10 do
   print_int (fib 30);
   print_newline ();
 done;;
-
-let a = 5;;
-let b = 6;;
-
-let a = b and b = a;;
