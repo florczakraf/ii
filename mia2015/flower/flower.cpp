@@ -76,10 +76,10 @@ int main()
   }
 
   int shortest = dijkstra(g, n, 0, n - 1);
-  vector<int> dist1(n), dist2(n);
+  vector<int> dist(n);
 
   for (int i = 0; i < n; i++)
-    dist1[i] = d[i];
+    dist[i] = d[i];
 
   dijkstra(g, n, n - 1, 0);
 
@@ -91,7 +91,7 @@ int main()
     int v = p2[i];
     int weight = w[i];
 
-    if ((dist1[u] + weight + d[v] == shortest) || dist1[v] + weight + d[u] == shortest)
+    if ((dist[u] + weight + d[v] == shortest) || dist[v] + weight + d[u] == shortest)
       sol += weight * 2;
   }
 
