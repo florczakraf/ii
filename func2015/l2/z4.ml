@@ -3,21 +3,21 @@ let rec merge cmp a b =
     [], _            -> b
   | _, []            -> a
   | x :: xs, y :: ys -> if cmp x y then x :: (merge cmp xs (y :: ys))
-			  else y :: (merge cmp (x :: xs) ys);;
+                        else y :: (merge cmp (x :: xs) ys);;
 
 let rec merge' ?(acc=[]) cmp a b =
   match a, b with
     [], _        -> acc @ b
   | _, []        -> acc @ a
   | x::xs, y::ys -> if cmp x y then merge' ~acc: (acc @ [x]) cmp xs (y :: ys)
-		      else merge' ~acc: (acc @ [y]) cmp (x :: xs) ys;;
+                    else merge' ~acc: (acc @ [y]) cmp (x :: xs) ys;;
 
 let rec take n xs =
   match n, xs with
     0, _       -> []
   | _, []      -> []
   | _, x :: xs -> x :: take (n - 1) xs;;
-  
+
 let rec drop n xs =
   match n, xs with
     0, _       -> xs
@@ -33,8 +33,8 @@ let rec mergesort cmp xs =
     []  -> []
   | [x] -> [x]
   | _   -> let (l, r) = div xs
-	   in merge' cmp (mergesort cmp l) (mergesort cmp r);;
-  
+           in merge' cmp (mergesort cmp l) (mergesort cmp r);;
+
 merge (<=) [3;4;5] [1;2;8];;
 merge' (<=) [3;4;5] [1;2;8];;
 mergesort (<=) [6;3;6;33;2;-4];;
