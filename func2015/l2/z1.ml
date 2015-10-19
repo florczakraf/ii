@@ -1,10 +1,8 @@
-let concat x xs =
-  x :: xs
+(* zadanie 1. *)
 
 let rec sublists xs =
   match xs with
-    []      -> [[]]
-  | x :: xs -> (List.map (concat x) (sublists xs)) @ (sublists xs);;
+    []    -> [[]]
+  | x::xs -> (List.map (fun xs -> x::xs) (sublists xs)) @ (sublists xs);;
 
-  (* test *)
 sublists [1;2;3];;
