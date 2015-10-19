@@ -1,4 +1,3 @@
-#from functools import *
 import timeit, sys
 
 def doskonale_skladana(n):
@@ -11,7 +10,7 @@ def doskonale_funkcyjna(n):
   return list(filter(lambda e: (e == sum(divs(e))), range(2, n)))
 
 if __name__ == "__main__":
-  n = int(sys.argv[1]) if len(sys.argv) > 1 else 5000
+  n = int(sys.argv[1]) if len(sys.argv) > 1 else 10000
 
-  print("Perfects lists:\t", timeit.timeit("doskonale_skladana(%i)" % n, number = 1, globals = globals()))
-  print("Perfects funct:\t", timeit.timeit("doskonale_funkcyjna(%i)" % n, number = 1, globals = globals()))
+  print("Perfects lists:\t", timeit.timeit("doskonale_skladana(%i)" % n, number = 1, setup = "from __main__ import doskonale_skladana"))
+  print("Perfects funct:\t", timeit.timeit("doskonale_funkcyjna(%i)" % n, number = 1, setup = "from __main__ import doskonale_funkcyjna"))
