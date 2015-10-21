@@ -1,12 +1,23 @@
 (* zadanie 6. *)
 
-let rec suffixes xs =
-  match xs with
-    [] -> []
-  | x::xs -> (x::xs)::suffixes xs;;
+let suffixes xs =
+  let rec aux acc xs =
+    match xs with
+      []    -> acc
+    | x::xs -> aux ((x::xs)::acc) xs
+  in
+  List.rev (aux [] xs);;
 
 let prefixes xs =
-  List.tl (List.rev (List.fold_left(fun acc e -> ((List.hd acc)@[e])::acc) [[]] xs));;
-
+  let rec aux acc xs =
+    match xs with
+      []    -> acc
+    | x::xs -> aux (((List.hd acc)@[x])::acc) xs
+  in
+  match xs with
+    []    -> []
+  | x::xs ->  List.rev (aux [[x]] xs);;
+  
 suffixes [1;2;3];;
 prefixes [1;2;3];;
+

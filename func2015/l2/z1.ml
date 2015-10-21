@@ -1,5 +1,7 @@
 (* zadanie 1. *)
 
+(* Nie potrafie napisac wersji bez generowania nieuzytkow *)
+
 let rec sublists xs =
   match xs with
     []    -> [[]]

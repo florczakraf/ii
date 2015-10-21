@@ -1,3 +1,5 @@
+(* zadanie 2. *)
+
 let rec a n =
   match n with
     0 -> 1
@@ -7,8 +9,10 @@ let rec a n =
 let rec a' ?(acc1 = 1) ?(acc2 = 2) ?(i = 0) n =
   let acc = 2 * acc1 - acc2 + 1
   in
-    if i = n then acc1 else a' ~acc1:acc2 ~acc2:acc ~i:(i + 1) n;; 
+  if i = n then acc1
+  else a' ~acc1:acc2 ~acc2:acc ~i:(i + 1) n;; 
 
-a 35;;
-a' 500;;
+(* wersja nieogonowa wyrzuca stack overflow *)
+a 500000;;
+a' 500000;;
       

@@ -8,3 +8,4 @@ let rec permutations xs =
   | xs    -> List.fold_left (fun acc x -> acc @ List.map (fun perm -> x::perm) (permutations (List.filter ((<>) x) xs))) [] xs;;
   
 permutations [1;2;3];;
+
