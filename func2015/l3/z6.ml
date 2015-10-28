@@ -19,21 +19,21 @@ let s1 n =
   | _ -> false;;
 
 let s2 n =
-  List.for_all (fun (x,y) -> not (c1 (x * y))) (s n);;
+  List.for_all (fun (x,y) -> not (s1 (x * y))) (s n);;
   
 let s3 n =
   let rec aux flag = function
       [] -> flag
-    | (x,y)::lst -> if flag && c2 (x + y) then false
-                    else if c2 (x + y) then aux true lst
+    | (x,y)::lst -> if flag && s2 (x + y) then false
+                    else if s2 (x + y) then aux true lst
                     else aux flag lst
   in aux false (p n);;
 
 let s4 n =
   let rec aux flag = function
       [] -> flag
-    | (x,y)::lst -> if flag && c3 (x * y) then false
-                    else if c3 (x * y) then aux true lst
+    | (x,y)::lst -> if flag && s3 (x * y) then false
+                    else if s3 (x * y) then aux true lst
                     else aux flag lst
   in aux false (s n);;
 
