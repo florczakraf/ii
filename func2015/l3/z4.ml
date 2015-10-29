@@ -18,6 +18,7 @@ let transpose m =
   List.mapi (fun i _ -> nth_column m i) m;;
   
 let zip = List.combine;;
+(* map2 (fun x y -> (x,y)) *)
 
 let rec zipf f xs ys =
   List.map (fun (x, y) -> f x y) (zip xs ys);;

@@ -10,7 +10,7 @@ let derivative coeffs =
 
 let derivative' = function
     [_] -> [0.]
-  | coeffs -> tl (mapi (fun i c -> c *. float_of_int i) coeffs);;
+  | coeffs -> List.tl (List.mapi (fun i c -> c *. float_of_int i) coeffs);;
   
 derivative [1.;0.;-1.;2.];;
 derivative' [1.;0.;-1.;2.];;

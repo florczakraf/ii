@@ -1,5 +1,3 @@
-
-
 let possible_pairs =
   let rec aux acc x y =
     if x = 50 then acc

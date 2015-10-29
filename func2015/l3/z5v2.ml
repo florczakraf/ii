@@ -31,8 +31,8 @@ let perms ?(cmp = (<)) lst =
 
 let nxt = next_permutation;;
   
-nxt [3;4;2;1];;
+nxt [5;4;3;2;1];;
 nxt ['b';'c';'a'];;
-permutations [1;2;3];;
+perms [1;2;3];;
 
     
