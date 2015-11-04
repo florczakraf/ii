@@ -1,0 +1,140 @@
+%%%%%%%%
+\documentclass [11pt, a4paper, leqno] {article}
+\usepackage [polish] {babel}
+\usepackage {polski}
+\usepackage [utf8] {inputenc}
+\usepackage [T1] {fontenc}
+\usepackage {indentfirst}
+\usepackage {setspace}
+\setstretch {1.15} %interlinia
+\frenchspacing
+\renewcommand {\thesection} {\arabic{section}.}
+\renewcommand {\thesubsection} {\arabic{section}. \arabic{subsection}.}
+\renewcommand {\thesubsubsection} {\arabic{section}. \arabic{subsection}.\arabic{subsubsection}.}
+\textheight 620pt
+\makeatletter
+\renewcommand\@biblabel[1]{#1}
+\makeatother
+%%%%%%%%
+
+\begin{document}
+% STRONA TYTUŁOWA
+
+\begin{center}
+  \thispagestyle{empty} %usunięcie numeracji
+  {\large Studencka Pracownia Inżynierii Oprogramowania} \\ [0.5cm]
+	{\large Instytut Informatyki Uniwersytetu Wrocławskiego} \\ [6.0cm]
+
+  {\large Rafał Florczak, Dominik Rabij} \\ [1.5cm]
+
+	{\huge Dokumentacja oprogramowania} \\ [0.5cm]
+  {\huge RECEPCJONISTA} \\ [1.5cm]
+
+  {\large Założenia wstępne} \\ [0.5cm]
+
+  \vfill
+  
+  {\large Wrocław, \today} \\ [0.5cm]
+  {\large Wersja 0.2}
+\end{center}
+
+\newpage
+
+% TABELKA WERSJI
+
+\textit{Tabela 0.} Historia zmian dokonanych w dokumencie
+
+\begin{center}
+  \begin{tabular}{| l | l | l | l |}
+    \hline
+    \multicolumn{1}{|c|}{Data} & 
+    \multicolumn{1}{|c|}{Numer wersji} &  
+    \multicolumn{1}{|c|}{Opis} &
+    \multicolumn{1}{|c|}{Autor} \\ \hline \hline
+    2015-11-02 & 0.1 & Utworzenie dokumentu & Rafał Florczak \\ \hline
+    2015-11-05 & 0.2 & Naniesienie poprawek & Dominik Rabij\\ \hline
+  \end{tabular}
+\end{center}
+
+\medskip
+
+\tableofcontents
+
+\newpage
+
+\section{Wprowadzenie}
+
+\subsection{Cel dokumentu}
+\noindent
+Celem niniejszego dokumentu jest przedstawienie i opis wymagań ogólnych oprogramowania wspomagającego prowadzenie rezerwacji miejsc hotelowych (dalej nazywanego ,,Recepcjonistą'' lub ,,Oprogramowaniem''). Szczegóły realizacji kolejnych kroków związanych z powstawaniem Oprogramowania zostaną opisane w następnych dokumentach.
+
+Ten dokument jest przeznaczony dla zleceniodawcy oraz osób wdrażających oprogramowanie.
+
+\subsection{Ogólny cel powstania Oprogramowania}
+\noindent
+Głównym celem Oprogramowania jest ułatwienie procesu rezerwacji pokojów hotelowych przez klientów hotelu oraz potwierdzanie takich rezerwacji przez obsługę hotelową.
+
+Dla klientów przewidziany jest specjalny formularz osadzony na stronie internetowej hotelu, który w prosty i przejrzysty sposób przeprowadzi ich przez proces rezerwacji pokojów.
+
+Od strony administracyjnej Recepcjonista umożliwia potwierdzanie i odrzucanie rezerwacji klientów, dodawanie nowych pokojów, a także modyfikowanie i kasowanie już istniejących.
+
+\section{Opis użytkowników Oprogramowania}
+
+\subsection{Klienci hotelu}
+\noindent
+Podstawowymi użytkownikami Oprogramowania będą klienci hotelu -- to dla nich przeznaczony jest formularz wspomniany w poprzednim punkcie.
+
+Klienci będą mieli możliwość zapoznania się z dostępnymi pokojami w zadanym przedziale czasu. Będą mogli również skontaktować się z obsługą hotelu poprzez odrębny formularz kontaktowy.
+
+Rezerwacja pokojów odbywać się będzie przez formularz osadzony na stronie internetowej hotelu na podstawie wybranego przedziału czasu, liczby i klasy pokojów oraz opcjonalnie takich atrybutów jak piętro czy liczba łazienek przypisanych do konkretnego pokoju.
+
+\subsection{Pracownicy hotelu}
+\noindent
+Upoważnieni pracownicy hotelu będą mogli dodawać nowe pokoje oraz modyfikować i usuwać istniejące. Dodatkowo do ich obowiązków będzie należało potwierdzanie rezerwacji klientów. W celach weryfikacyjnych będą oni mieli dostęp do wszystkich danych wprowadzonych do systemu podczas składania rezerwacji przez klienta.
+
+%\section{Zaplecze sprzętowe i programowe}
+%\subsection{Sprzęt}
+%\noindent
+%Do uruchomienia i sprawnego działania Recepcjonisty potrzebny jest komputer spełniający poniższą specyfikację: 
+%\begin{itemize}
+%\item procesor klasy Pentium II lub nowszy,
+%\item pamięć RAM 4GB lub większa,
+%\item dysk o pojemności 1TB lub większej.
+%\end{itemize}
+
+%\subsection{System}
+%\noindent
+%System operacyjny Debian w wersji 6 lub nowszej. Reszta zewnętrznego oprogramowania zostanie dostarczona wraz z %produktem końcowym.
+
+\section{Harmonogram}
+\noindent
+Projekt został podzielony na następujące etapy:
+\begin{itemize}
+\item analiza,
+\item projektowanie,
+\item implementacja,
+\item testowanie,
+\item wdrażanie.
+\end{itemize}
+
+\subsection{Analiza}
+\noindent
+Etap analizy polega na szczegółowym opisaniu wymagań dotyczących projektu we współpracy z klientem. Po zakończeniu tej fazy określone będą też cele oprogramowania. Etap powinien zająć do 5 dni roboczych.
+
+\subsection{Projektowanie}
+\noindent
+W tym etapie zostaną stworzone pierwsze szkice interfejsu graficznego aplikacji, opracowana będzie struktura bazy danych oraz podział programu na moduły. Na koniec dokonany zostanie też podział prac. Etap powinien zająć do 10 dni roboczych.
+
+\subsection{Implementacja}
+\noindent
+Na podstawie projektów utworzonych w poprzednim etapie zespół programistów będzie tworzył kolejne moduły systemu. Przewiduje się, że ten etap zajmie do 6 miesięcy.
+
+\subsection{Testowanie}
+\noindent
+Oprogramowanie będzie poddawane dogłębnym testom. Sprawdzone zostaną wszelkie możliwe scenariusze zachowań użytkowników oraz zgodność ze specyfikacją utworzoną w fazach analizy i projektowania. Testowanie będzie trwało nie dłużej niż miesiąc.
+
+\subsection{Wdrażanie}
+\noindent
+Na tym etapie prace związane z implementacją i testowaniem powinny być już zakończone. Etap ten obejmuje instalację i konfigurację oprogramowania oraz także szkolenia w zakresie jego obsługi. Oczekujemy, że potrwa to mniej niż tydzień.
+
+\end{document}
