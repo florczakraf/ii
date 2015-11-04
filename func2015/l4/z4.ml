@@ -1,4 +1,6 @@
 (* zadanie 4. *)
+(* rozwiązałem tylko dwa pierwsze podpunkty *)
+
 type formula =
   | Var of char
   | Not of formula
@@ -36,34 +38,17 @@ let is_tautology f =
                        | _, False vals -> False vals
                        | True, True -> True
      in aux [] vars;;
-
+  
 let rec nnf = function
+  | Var v -> Var v
   | Not f -> (match f with
-               Var v -> Not (Var v)
-             | Not f -> nnf f
-             | And (f1, f2) -> Or (nnf (Not f1), nnf (Not f2))
-             | Or (f1, f2) -> And (nnf (Not f1), nnf (Not f2)))
+                Var v -> Not (Var v)
+              | Not f -> nnf f
+              | And (f1, f2) -> Or (nnf (Not f1), nnf (Not f2))
+              | Or (f1, f2) -> And (nnf (Not f1), nnf (Not f2)))
   | And (f1, f2) -> And (nnf f1, nnf f2)
-  | Or (f1, f2) -> Or (nnf f1, nnf f2)
-  | Var v -> Var v;;
-
-
-(* zepchanie negacji, następnie rozdzielenie and przez or *)
-let cnf f =
-  let rec aux = function
-    | Or (And (f1, f2), f3) -> aux (And (aux (Or (aux f1, aux f3)), aux (Or (aux f2, aux f3))))
-    | Or (f1, And (f2, f3)) -> aux (And (aux (Or (aux f1, aux f2)), aux (Or (aux f1, aux f3))))
-    | f -> f
-  in aux (nnf f);;
-
-(* zepchanie negacji, potem rozdzielenie or przez and *)  
-let dnf f =
-  let rec aux = function
-    | And (Or (f1, f2), f3) -> aux (Or (aux (And (aux f1, aux f3)), aux (And (aux f2, aux f3))))
-    | And (f1, Or (f2, f3)) -> aux (Or (aux (And (aux f1, aux f2)), aux (And (aux f1, aux f3))))
-    | f -> f
-  in aux (nnf f);;
-
+  | Or (f1, f2) -> Or (nnf f1, nnf f2);;
+  
 (* testy *)
   
 let f1 = Or (Var 'a', Not (Var 'b'));;
@@ -73,12 +58,6 @@ extract_vars f1 = ['b';'a'];;
 is_tautology f1;;
 is_tautology taut = True;;
 nnf taut = Or (Var 'a', Not (Var 'a'));;
-nnf f2;;
-cnf f2;;
-dnf f2;;
-(*
-f2 = (a ^ b) v ~(c ^ (d ^ e))
-nnf f2 = (a ^ b) v (~c v (~d v ~e))
-cnf f2 = (a v (~c v (~d v ~e))) ^ (b v (~c v (~d v ~e)))
-dnf f2 = ((a ^ b) v (~c v (~d v ~e)))
-*)
+nnf f2 = Or (And (Var 'a', Var 'b'), Or (Not (Var 'c'), Or (Not (Var 'd'), Not (Var 'e'))));;
+
+
