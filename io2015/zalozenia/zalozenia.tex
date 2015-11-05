@@ -34,8 +34,9 @@
 
   \vfill
   
-  {\large Wrocław, \today} \\ [0.5cm]
-  {\large Wersja 0.2}
+  %{\large Wrocław, \today} \\ [0.5cm]
+  {\large Wrocław, 6 listopada 2015} \\ [0.5cm]
+  {\large Wersja 0.3}
 \end{center}
 
 \newpage
@@ -53,6 +54,7 @@
     \multicolumn{1}{|c|}{Autor} \\ \hline \hline
     2015-11-02 & 0.1 & Utworzenie dokumentu & Rafał Florczak \\ \hline
     2015-11-05 & 0.2 & Naniesienie poprawek & Dominik Rabij\\ \hline
+    2015-11-06 & 0.3 & Naniesienie poprawek & Rafał Florczak\\ \hline
   \end{tabular}
 \end{center}
 
@@ -66,31 +68,31 @@
 
 \subsection{Cel dokumentu}
 \noindent
-Celem niniejszego dokumentu jest przedstawienie i opis wymagań ogólnych oprogramowania wspomagającego prowadzenie rezerwacji miejsc hotelowych (dalej nazywanego ,,Recepcjonistą'' lub ,,Oprogramowaniem''). Szczegóły realizacji kolejnych kroków związanych z powstawaniem Oprogramowania zostaną opisane w następnych dokumentach.
+Celem niniejszego dokumentu jest przedstawienie i opis wymagań ogólnych oprogramowania wspomagającego prowadzenie rezerwacji miejsc hotelowych (dalej nazywanego ,,Recepcjonistą''). Szczegóły realizacji kolejnych kroków związanych z powstawaniem Recepcjonisty zostaną opisane w następnych dokumentach.
 
 Ten dokument jest przeznaczony dla zleceniodawcy oraz osób wdrażających oprogramowanie.
 
-\subsection{Ogólny cel powstania Oprogramowania}
+\subsection{Ogólny cel powstania Recepcjonisty}
 \noindent
-Głównym celem Oprogramowania jest ułatwienie procesu rezerwacji pokojów hotelowych przez klientów hotelu oraz potwierdzanie takich rezerwacji przez obsługę hotelową.
+Głównym celem Recepcjonisty jest ułatwienie procesu rezerwacji pokojów hotelowych przez klientów hotelu oraz potwierdzanie takich rezerwacji przez obsługę hotelową.
 
 Dla klientów przewidziany jest specjalny formularz osadzony na stronie internetowej hotelu, który w prosty i przejrzysty sposób przeprowadzi ich przez proces rezerwacji pokojów.
 
 Od strony administracyjnej Recepcjonista umożliwia potwierdzanie i odrzucanie rezerwacji klientów, dodawanie nowych pokojów, a także modyfikowanie i kasowanie już istniejących.
 
-\section{Opis użytkowników Oprogramowania}
+\section{Opis użytkowników}
 
 \subsection{Klienci hotelu}
 \noindent
-Podstawowymi użytkownikami Oprogramowania będą klienci hotelu -- to dla nich przeznaczony jest formularz wspomniany w poprzednim punkcie.
+Podstawowymi użytkownikami Recepcjonisty są klienci hotelu -- to dla nich przeznaczony jest formularz wspomniany w poprzednim punkcie.
 
-Klienci będą mieli możliwość zapoznania się z dostępnymi pokojami w zadanym przedziale czasu. Będą mogli również skontaktować się z obsługą hotelu poprzez odrębny formularz kontaktowy.
+Klienci mają możliwość zapoznania się z dostępnymi pokojami w zadanym przedziale czasu. Mogą również skontaktować się z obsługą hotelu za pośrednictwem odrębnego formularza kontaktowego.
 
-Rezerwacja pokojów odbywać się będzie przez formularz osadzony na stronie internetowej hotelu na podstawie wybranego przedziału czasu, liczby i klasy pokojów oraz opcjonalnie takich atrybutów jak piętro czy liczba łazienek przypisanych do konkretnego pokoju.
+Rezerwacja pokojów odbywa się przy użyciu formularza osadzonego na stronie internetowej hotelu. Rezerwowane pokoje będą wybrane na podstawie wyznaczonego przedziału czasu, liczby i klasy pokojów oraz szczegółów takich jak piętro czy liczba łazienek przypisanych do konkretnego pokoju.
 
 \subsection{Pracownicy hotelu}
 \noindent
-Upoważnieni pracownicy hotelu będą mogli dodawać nowe pokoje oraz modyfikować i usuwać istniejące. Dodatkowo do ich obowiązków będzie należało potwierdzanie rezerwacji klientów. W celach weryfikacyjnych będą oni mieli dostęp do wszystkich danych wprowadzonych do systemu podczas składania rezerwacji przez klienta.
+Upoważnieni pracownicy hotelu mogą dodawać nowe pokoje oraz modyfikować i usuwać istniejące. Dodatkowo do ich obowiązków należy potwierdzanie oraz odrzucanie rezerwacji klientów. W celach weryfikacyjnych mają oni dostęp do wszystkich danych wprowadzonych do systemu podczas składania rezerwacji przez klienta.
 
 %\section{Zaplecze sprzętowe i programowe}
 %\subsection{Sprzęt}
@@ -127,14 +129,14 @@ W tym etapie zostaną stworzone pierwsze szkice interfejsu graficznego aplikacji
 
 \subsection{Implementacja}
 \noindent
-Na podstawie projektów utworzonych w poprzednim etapie zespół programistów będzie tworzył kolejne moduły systemu. Przewiduje się, że ten etap zajmie do 6 miesięcy.
+Na podstawie projektów utworzonych w poprzednim etapie zespół programistów będzie tworzył kolejne moduły Recepcjonisty. Przewiduje się, że ten etap zajmie do 6 miesięcy.
 
 \subsection{Testowanie}
 \noindent
-Oprogramowanie będzie poddawane dogłębnym testom. Sprawdzone zostaną wszelkie możliwe scenariusze zachowań użytkowników oraz zgodność ze specyfikacją utworzoną w fazach analizy i projektowania. Testowanie będzie trwało nie dłużej niż miesiąc.
+Oprogramowanie będzie poddawane dogłębnym testom. Sprawdzone zostaną możliwe scenariusze zachowań użytkowników oraz zgodność ze specyfikacją utworzoną w fazach analizy i projektowania. Testowanie będzie trwało nie dłużej niż miesiąc.
 
 \subsection{Wdrażanie}
 \noindent
-Na tym etapie prace związane z implementacją i testowaniem powinny być już zakończone. Etap ten obejmuje instalację i konfigurację oprogramowania oraz także szkolenia w zakresie jego obsługi. Oczekujemy, że potrwa to mniej niż tydzień.
+Na tym etapie prace związane z implementacją i testowaniem powinny być już zakończone. Etap ten obejmuje instalację i konfigurację oprogramowania oraz szkolenia w zakresie jego obsługi. Oczekujemy, że potrwa to około tygodnia.
 
 \end{document}
