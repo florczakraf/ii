@@ -24,7 +24,7 @@ class Traversal:
       for match in expr.finditer(page):
         link = match.group()
         if link not in self.visited:
-          self.visited.add_nowait(link)
+          self.visited.add(link)
           self.queue.put_nowait((link, depth + 1))
 
     for match in self.func(page):
