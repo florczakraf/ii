@@ -1,4 +1,3 @@
-#!/usr/bin/python3.5
 import timeit, sys
 
 def doskonale_skladana(n):
@@ -14,10 +13,18 @@ def doskonale_iteracyjna(n):
   divs = lambda m: list(filter(lambda e: m % e == 0, range(1, int(m / 2) + 1)))
   return filter(lambda e: (e == sum(divs(e))), range(2, n))
 
+def it(n):
+  for i in doskonale_iteracyjna(n):
+    pass
+
+def it_fun(n):
+  for i in doskonale_funkcyjna(n):
+    pass
+
 if __name__ == "__main__":
   
   ns = [10, 100, 1000, 10000]
-  tests = ["doskonale_skladana", "doskonale_funkcyjna", "doskonale_iteracyjna"]
+  tests = ["doskonale_skladana", "it_fun", "it"]
   
   for t in tests:
     print("%s:" % t)

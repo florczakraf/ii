@@ -1,4 +1,3 @@
-#!/usr/bin/python3.5
 from io import StringIO
 
 def upper_first(str):
@@ -14,7 +13,7 @@ def korekta(str):
     return str + '. '
 
 def zdania(stream):
-  sentences = stream.read(-1).split(sep = '.')
+  sentences = stream.read().split(sep = '.')
   sentences = filter(None, map(lambda s: s.replace("\n", " ").strip(), sentences))
   
   for s in sentences:
