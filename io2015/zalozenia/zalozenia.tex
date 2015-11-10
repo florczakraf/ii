@@ -11,10 +11,11 @@
 \renewcommand {\thesection} {\arabic{section}.}
 \renewcommand {\thesubsection} {\arabic{section}. \arabic{subsection}.}
 \renewcommand {\thesubsubsection} {\arabic{section}. \arabic{subsection}.\arabic{subsubsection}.}
-\textheight 620pt
+\textheight 610pt
 \makeatletter
 \renewcommand\@biblabel[1]{#1}
 \makeatother
+\usepackage[a4paper,left=3.8cm,right=3.8cm,top=3.3cm,bottom=3cm]{geometry}
 %%%%%%%%
 
 \begin{document}
@@ -34,9 +35,9 @@
 
   \vfill
   
-  %{\large Wrocław, \today} \\ [0.5cm]
-  {\large Wrocław, 6 listopada 2015} \\ [0.5cm]
-  {\large Wersja 0.3}
+  {\large Wrocław, \today} \\ [0.5cm]
+  %{\large Wrocław, 6 listopada 2015} \\ [0.5cm]
+  {\large Wersja 0.4}
 \end{center}
 
 \newpage
@@ -55,6 +56,7 @@
     2015-11-02 & 0.1 & Utworzenie dokumentu & Rafał Florczak \\ \hline
     2015-11-05 & 0.2 & Naniesienie poprawek & Dominik Rabij\\ \hline
     2015-11-06 & 0.3 & Naniesienie poprawek & Rafał Florczak\\ \hline
+    2015-11-09 & 0.4 & Naniesienie poprawek & Dominik Rabij\\ \hline
   \end{tabular}
 \end{center}
 
@@ -68,7 +70,7 @@
 
 \subsection{Cel dokumentu}
 \noindent
-Celem niniejszego dokumentu jest przedstawienie i opis wymagań ogólnych oprogramowania wspomagającego prowadzenie rezerwacji miejsc hotelowych (dalej nazywanego ,,Recepcjonistą''). Szczegóły realizacji kolejnych kroków związanych z powstawaniem Recepcjonisty zostaną opisane w następnych dokumentach.
+Celem niniejszego dokumentu jest przedstawienie i opis wymagań ogólnych dotyczących oprogramowania wspomagającego prowadzenie rezerwacji miejsc hotelowych (dalej nazywanego ,,Recepcjonistą''). Szczegóły realizacji kolejnych kroków związanych z powstawaniem Recepcjonisty zostaną opisane w następnych dokumentach.
 
 Ten dokument jest przeznaczony dla zleceniodawcy oraz osób wdrażających oprogramowanie.
 
@@ -84,15 +86,15 @@ Od strony administracyjnej Recepcjonista umożliwia potwierdzanie i odrzucanie r
 
 \subsection{Klienci hotelu}
 \noindent
-Podstawowymi użytkownikami Recepcjonisty są klienci hotelu -- to dla nich przeznaczony jest formularz wspomniany w poprzednim punkcie.
+Podstawowymi użytkownikami Recepcjonisty są klienci hotelu -- to dla nich jest przeznaczony formularz wspomniany w p. 1.2.
 
 Klienci mają możliwość zapoznania się z dostępnymi pokojami w zadanym przedziale czasu. Mogą również skontaktować się z obsługą hotelu za pośrednictwem odrębnego formularza kontaktowego.
 
-Rezerwacja pokojów odbywa się przy użyciu formularza osadzonego na stronie internetowej hotelu. Rezerwowane pokoje będą wybrane na podstawie wyznaczonego przedziału czasu, liczby i klasy pokojów oraz szczegółów takich jak piętro czy liczba łazienek przypisanych do konkretnego pokoju.
+Rezerwacja pokojów odbywa się z użyciem formularza osadzonego na stronie internetowej hotelu. Rezerwowane pokoje są wybierane na podstawie wyznaczonego przedziału czasu, liczby i klasy pokojów oraz szczegółów takich, jak piętro lub liczba łazienek przypisanych do konkretnego pokoju.
 
 \subsection{Pracownicy hotelu}
 \noindent
-Upoważnieni pracownicy hotelu mogą dodawać nowe pokoje oraz modyfikować i usuwać istniejące. Dodatkowo do ich obowiązków należy potwierdzanie oraz odrzucanie rezerwacji klientów. W celach weryfikacyjnych mają oni dostęp do wszystkich danych wprowadzonych do systemu podczas składania rezerwacji przez klienta.
+Upoważnieni pracownicy hotelu mogą dodawać nowe pokoje oraz modyfikować i usuwać istniejące. Dodatkowo do ich obowiązków należy potwierdzanie oraz odrzucanie rezerwacji klientów. W celach kontrolnych mają oni dostęp do wszystkich danych wprowadzonych do systemu podczas składania rezerwacji przez klienta.
 
 %\section{Zaplecze sprzętowe i programowe}
 %\subsection{Sprzęt}
@@ -125,15 +127,16 @@ Etap analizy polega na szczegółowym opisaniu wymagań dotyczących projektu we
 
 \subsection{Projektowanie}
 \noindent
-W tym etapie zostaną stworzone pierwsze szkice interfejsu graficznego aplikacji, opracowana będzie struktura bazy danych oraz podział programu na moduły. Na koniec dokonany zostanie też podział prac. Etap powinien zająć do 10 dni roboczych.
+W tym etapie zostaną nakreślone pierwsze szkice interfejsu graficznego Recepcjonisty, opracowana będzie struktura bazy danych oraz podział programu na moduły. Pod koniec tego etapu nastąpi podział prac. Etap powinien zająć do 10 dni roboczych.
 
 \subsection{Implementacja}
 \noindent
-Na podstawie projektów utworzonych w poprzednim etapie zespół programistów będzie tworzył kolejne moduły Recepcjonisty. Przewiduje się, że ten etap zajmie do 6 miesięcy.
+Na podstawie projektów utworzonych w poprzednim etapie zespół pięciu programistów (jeden z sześcioletnim doświadczeniem oraz czterech stażystów) będzie tworzył kolejne moduły Recepcjonisty. Przewiduje się, że ten etap zajmie do 6 miesięcy.
 
 \subsection{Testowanie}
 \noindent
-Oprogramowanie będzie poddawane dogłębnym testom. Sprawdzone zostaną możliwe scenariusze zachowań użytkowników oraz zgodność ze specyfikacją utworzoną w fazach analizy i projektowania. Testowanie będzie trwało nie dłużej niż miesiąc.
+Oprogramowanie będzie poddawane systematycznym i dogłębnym testom. 
+Sprawdzone zostaną możliwe scenariusze zachowań użytkowników oraz zgodność ze specyfikacją utworzoną w fazach analizy i projektowania. Testowanie będzie trwało nie dłużej niż miesiąc.
 
 \subsection{Wdrażanie}
 \noindent
