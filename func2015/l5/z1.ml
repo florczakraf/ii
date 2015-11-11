@@ -1,13 +1,5 @@
 type 'a llist = LNil | LCons of 'a * (unit -> 'a llist);;
 
-let lhd = function
-  | LNil -> failwith "lhd"
-  | LCons (x, _) -> x;;
-
-let ltl = function
-  | LNil -> failwith "ltl"
-  | LCons (_, xs) -> xs ();;
-
 let rec lfrom k = LCons (k, fun () -> lfrom (k + 1));;
 
 let rec ltake i llst =
