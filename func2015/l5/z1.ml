@@ -23,8 +23,6 @@ let rec apply f = function
                         in let LCons (z, zs) = ys ()
                            in LCons(f x y z, fun () -> apply f xs);;
 
-
-
 let euler_pi =
   let transform x y z =
     let yz = y -. z
@@ -34,7 +32,7 @@ let euler_pi =
 ltake 5 leibniz_pi;;
 ltake 5 euler_pi;;
 
-(* lazy, force *)
+(* lazy *)
 type 'a llist = LNil | LCons of 'a * 'a llist Lazy.t;;
 
 let rec lfrom k = LCons (k, lazy (lfrom (k + 1)));;
@@ -64,6 +62,6 @@ let euler_pi =
     let yz = y -. z
     in z -. yz *. yz /. (x -. 2. *. y +. z)
   in apply transform leibniz_pi;;
-  
+
 ltake 5 leibniz_pi;;
 ltake 5 euler_pi;;
