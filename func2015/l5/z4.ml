@@ -14,7 +14,7 @@ let make_tree freqs =
   let leafs = List.map (fun (c, f) -> Leaf (c, f)) freqs
   in let sorted = List.sort cmp leafs
      in let rec aux = function
-          | [] -> []
+          | [] -> assert false
           | [x] -> [x]
           | a::b::tl -> let fa = freq a and fb = freq b
                         in if fa > fb then aux (List.merge cmp [Node (a, fa +. fb , b)] tl)
@@ -32,10 +32,6 @@ let rec encode codes lst =
     | [] -> []
     | h::t -> fst (List.find (fun (_, char) -> h = char) codes) :: (aux t)
   in List.flatten (aux lst);;
-
-let rec decode codes = function
-  | [] -> []
-  | h::t -> snd (List.find (fun (c, _) -> c = h) codes)::(decode codes t);;
 
 let decode tree lst =
   let rec aux acc lst t =

@@ -10,7 +10,7 @@ let rec ltake i llst =
 
 let leibniz_pi =
   let rec aux acc = function
-    | LNil -> failwith "?"
+    | LNil -> assert false
     | LCons (h, t) -> let sign = if h mod 2 = 0 then -1. else 1.
                       in let next = (acc +. sign *. 4. *. (1. /. (2. *. float_of_int h -. 1.)))
                          in LCons (next, fun () -> aux next (t ()))
@@ -29,8 +29,8 @@ let euler_pi =
     in z -. yz *. yz /. (x -. 2. *. y +. z)
   in apply transform leibniz_pi;;
   
-ltake 5 leibniz_pi;;
-ltake 5 euler_pi;;
+ltake 15 leibniz_pi;;
+ltake 15 euler_pi;;
 
 (* lazy *)
 type 'a llist = LNil | LCons of 'a * 'a llist Lazy.t;;
@@ -45,7 +45,7 @@ let rec ltake i llst =
 
 let leibniz_pi =
   let rec aux acc = function
-    | LNil -> failwith "?"
+    | LNil -> assert false
     | LCons (h, lazy t) -> let sign = if h mod 2 = 0 then -1. else 1.
                            in let next = (acc +. sign *. 4. *. (1. /. (2. *. float_of_int h -. 1.)))
                               in LCons (next, lazy (aux next t))
@@ -63,5 +63,5 @@ let euler_pi =
     in z -. yz *. yz /. (x -. 2. *. y +. z)
   in apply transform leibniz_pi;;
 
-ltake 5 leibniz_pi;;
-ltake 5 euler_pi;;
+ltake 15 leibniz_pi;;
+ltake 15 euler_pi;;
