@@ -20,7 +20,7 @@ class Traversal:
   def iter(self):
     while True:
       try:
-        yield self.solution.get_nowait()
+        yield self.solution.get(False)
       except queue.Empty:
         if self.threads.qsize() == self.finished.qsize() and self.solution.empty():
           raise StopIteration()
