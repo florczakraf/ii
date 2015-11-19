@@ -20,5 +20,5 @@ let ala_ma n = sprintf (lit "Ala ma " ++ inr ++ lit " kot" ++ str ++ lit ".") n
 ala_ma 1;;
 ala_ma 2;;
 ala_ma 5;;
-ala_ma 123;;
+ala_ma 128;;
 
