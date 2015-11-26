@@ -12,7 +12,7 @@ fact 4 = 24;;
       
 
 let fact' n =
-  let f = ref (fun n -> n)
+  let f = ref (fun x -> x)
   in f := (fun n -> if n = 0 then 1 else n * (!f (n - 1)));
      !f n;;
 
