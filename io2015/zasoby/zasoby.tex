@@ -1,0 +1,183 @@
+%%%%%%%%
+\documentclass [11pt, a4paper, leqno] {article}
+\usepackage [polish] {babel}
+\usepackage {polski}
+\usepackage [utf8] {inputenc}
+\usepackage [T1] {fontenc}
+\usepackage {indentfirst}
+\usepackage {setspace}
+\usepackage{amstext}
+\setstretch {1.15} %interlinia
+\frenchspacing
+\renewcommand {\thesection} {\arabic{section}.}
+\renewcommand {\thesubsection} {\arabic{section}. \arabic{subsection}.}
+\renewcommand {\thesubsubsection} {\arabic{section}. \arabic{subsection}.\arabic{subsubsection}.}
+\textheight 610pt
+\makeatletter
+\renewcommand\@biblabel[1]{#1}
+\makeatother
+\usepackage[a4paper,left=3.8cm,right=3.8cm,top=3.3cm,bottom=3cm]{geometry}
+%%%%%%%%
+
+\begin{document}
+% STRONA TYTUŁOWA
+
+\begin{center}
+  \thispagestyle{empty} %usunięcie numeracji
+  {\large Studencka Pracownia Inżynierii Oprogramowania} \\ [0.5cm]
+	{\large Instytut Informatyki Uniwersytetu Wrocławskiego} \\ [6.0cm]
+
+  {\large Rafał Florczak, Dominik Rabij} \\ [1.5cm]
+
+	{\huge Dokumentacja oprogramowania} \\ [0.5cm]
+  {\huge RECEPCJONISTA} \\ [1.5cm]
+
+  {\large Zasoby konieczne do realizacji projektu oraz kosztorys} \\ [0.5cm]
+
+  \vfill
+  
+  {\large Wrocław, \today} \\ [0.5cm]
+  %{\large Wrocław, 6 listopada 2015} \\ [0.5cm]
+  {\large Wersja 0.1}
+\end{center}
+
+\newpage
+
+% TABELKA WERSJI
+
+\textit{Tabela 0.} Historia zmian dokonanych w dokumencie
+
+\begin{center}
+  \begin{tabular}{| l | l | l | l |}
+    \hline
+    \multicolumn{1}{|c|}{Data} & 
+    \multicolumn{1}{|c|}{Numer wersji} &  
+    \multicolumn{1}{|c|}{Opis} &
+    \multicolumn{1}{|c|}{Autor} \\ \hline \hline
+    2015-12-02 & 0.1 & Utworzenie dokumentu & Dominik Rabij \\ \hline
+  \end{tabular}
+\end{center}
+
+\medskip
+
+\tableofcontents
+
+\newpage
+
+\section{Wprowadzenie}
+
+\subsection{Cel dokumentu}
+\noindent
+Celem niniejszego dokumentu jest przedstawienie zasobów niezbędnych do sprawnego zrealizowania Recepcjonisty oraz oszacowanie kosztów całego przedsięwzięcia. 
+
+Dokument jest przeznaczony dla osób decyzyjnych po stronie klienta oraz dla zleceniobiorcy.
+
+\section{Zasoby}
+
+\subsection{Zasoby ludzkie}
+\noindent
+Osoby zaangażowane w tworzenie Recepcjonisty:
+\begin{itemize}
+\item kierownik do spraw sprzedaży,
+\item kierownik projektu,
+\item zespół programistów:
+  \begin{itemize}
+  \item doświadczony programista (lider),
+  \item czterech stażystów,
+  \end{itemize}
+\item dwóch grafików,
+\item pięciu testerów.
+\end{itemize}
+
+\subsection{Zasoby sprzętowe}
+\noindent
+Dla każdej osoby pracującej nad projektem potrzebna jest stacja robocza wraz z oprogramowaniem. Dodatkowo grafikom należy zapewnić dostęp do tabletów graficznych oraz dodatkowych monitorów.
+
+\section{Kosztorys}
+\noindent
+Kosztorys został podzielony na części odpowiadające etapom tworzenia projektu, które zostały wydzielone w dokumencie \cite{zalozenia}. Trzeba również pamiętać o koszcie sprzętu i oprogramowania z p. 2.2.
+
+\subsection{Analiza}
+\noindent
+W fazie analizy główną rolę odgrywa kierownik do spraw sprzedaży, gdyż to on kontaktuje się z klientem i tworzy dokument wymagań dotyczących oprogramowania.
+
+\begin{equation}1\\\ 000 \text{ zł/dzień} \times 5 \text{ dni} = 5\\\ 000 \text{ zł} \end{equation}
+
+\subsection{Projektowanie}
+Przy projektowaniu biorą udział kierownik projektu i lider zespołu programistów.
+
+\begin{equation}2 \text{ osoby} \times 600 \text{ zł/dzień} \times 10 \text{ dni} = 12\\\ 000 \text{ zł} \end{equation}
+
+\subsection{Implementacja}
+\noindent
+W czasie tej fazy opłacani są:
+\begin{itemize}
+\item kierownik projektu: 
+\end{itemize}
+\begin{equation}15\\\ 000 \text{ zł/miesiąc} \times 6 \text{ miesięcy} = 90\\\ 000 \text{ zł,} \end{equation}
+
+\begin{itemize}
+\item lider zespołu programistów: 
+\end{itemize}
+\begin{equation}12\\\ 000 \text{ zł/miesiąc} \times 6 \text{ miesięcy} = 72\\\ 000 \text{ zł,} \end{equation}
+
+\begin{itemize}
+\item pozostali programiści: 
+\end{itemize}
+\begin{equation}4 \text{ osoby} \times 2\\\ 000 \text{ zł/miesiąc} \times 6 \text{ miesięcy} = 48\\\ 000 \text{ zł,} \end{equation}
+
+\begin{itemize}
+\item graficy: 
+\end{itemize}
+\begin{equation}2 \text{ osoby} \times 6\\\ 000 \text{ zł/miesiąc} \times 6 \text{ miesięcy} = 72\\\ 000 \text{ zł.} \end{equation}
+
+\subsection{Testowanie}
+\noindent
+W czasie testowania pracują:
+
+\begin{itemize}
+\item kierownik projektu: 
+\end{itemize}
+\begin{equation} 15\\\ 000 \text{ zł/miesiąc} \times 1 \text{ miesiąc} = 15\\\ 000 \text{ zł,} \end{equation}
+
+\begin{itemize}
+\item testerzy: 
+\end{itemize}
+\begin{equation}5 \text{ osób} \times 5\\\ 000 \text{ zł/miesiąc} \times 1 \text{ miesiąc} = 25\\\ 000 \text{ zł,} \end{equation}
+
+\begin{itemize}
+\item główny programista: 
+\end{itemize}
+\begin{equation}12\\\ 000 \text{ zł/miesiąc} \times 1 \text{ miesąc} = 12\\\ 000 \text{ zł.} \end{equation}
+
+\subsection{Wdrażanie}
+\noindent
+Przy wdrażaniu biorą udział:
+
+\begin{itemize}
+\item kierownik do spraw sprzedaży: 
+\end{itemize}
+\begin{equation}1\\\ 000 \text{ zł/dzień} \times 5 \text{ dni} = 5\\\ 000 \text{ zł,} \end{equation}
+
+\begin{itemize}
+\item kierownik projektu: 
+\end{itemize}
+\begin{equation}5\\\ 000 \text{ zł/dzień} \times 5 \text{ dni} = 25\\\ 000 \text{ zł.} \end{equation}
+
+\subsection{Sprzęt}
+\noindent
+\begin{equation}14 \text{ stacji roboczych} \times 5\\\ 000 \text{ zł} + 2 \text{ tablety graficzne} \times 5\\\ 000 = 80\\\ 000 \text{ zł} \end{equation}
+
+\subsection{Podsumowanie}
+\noindent
+Po zsumowaniu powyższych części składowych otrzymujemy:
+\begin{equation}
+\sum\limits_{i=1}^{12} (i) = 461\\\ 000 \text{ zł}
+\end{equation}
+
+\newpage
+\addcontentsline{toc}{section}{Literatura}
+\begin{thebibliography}{2}
+	\bibitem{zalozenia} Florczak R., Rabij D.: \emph{Dokumentacja oprogramowania Recepcjonista. Założenia wstępne.} Wrocław, Studencka Pracownia Inżynierii Oprogramowania, Instytut Informatyki Uniwersytetu Wrocławskiego~2015.
+\end{thebibliography}
+\end{document}
