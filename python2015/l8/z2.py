@@ -3,7 +3,7 @@ import shelve
 
 class DB:
   def __init__(self):
-    self.database = shelve.open('data.db')
+    self.database = shelve.open("data.db")
 
   def add_cd(self, title, author, songs, borrowed):
     self.database[title] = [author, songs, borrowed]
@@ -108,5 +108,8 @@ class App:
     self.listbox.insert(Tkinter.END, self.str_title.get())
 
 
-app = App()
-app.window.mainloop()
+if __name__ == "__main__":
+  app = App()
+  app.window.mainloop()
+
+
