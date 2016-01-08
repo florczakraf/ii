@@ -19,13 +19,4 @@ struct
     | Leaf -> 0
     | Node (l, _, r) -> max (depth l) (depth r) + 1
 end
-
-  (*testy*)(*
-module Int : COMPARABLE with type t = int =
-struct
-  type t = int
-             
-  let str = string_of_int
-end;;
   
-module B = Bintree(Int);;*)

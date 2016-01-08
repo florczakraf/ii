@@ -4,3 +4,6 @@
 *.gz
 *.aux
 *.toc
+*.out
+*.cmi
+*.cmo

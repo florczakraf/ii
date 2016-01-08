@@ -39,14 +39,14 @@ struct
     | Leaf -> 0
     | Node (r, _, _, _) -> r
 
-  let single v = Node (1, Leaf, v, Leaf)
+  let make_node v = Node (1, Leaf, v, Leaf)
 
   let rec merge lt rt =
     match lt, rt with
       Leaf, t -> t
     | t, Leaf -> t
     | Node (_, ll, lv, lr), Node (_, _, rv, _) ->
-       if lv > rv then merge rt lt
+       if T.E.cmp lv rv > 0 then merge rt lt (*lv > rv*)
        else
          let merged = merge lr rt
          in let lrank = rank ll and rrank = rank merged
@@ -54,7 +54,7 @@ struct
                then Node (rrank + 1, ll, lv, merged)
                else Node (lrank + 1, merged, lv, ll)
 
-  let insert v h = merge h (single v)
+  let insert v h = merge h (make_node v)
       
   let min  = function
     | Leaf -> failwith "Heap is empty"

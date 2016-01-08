@@ -39,14 +39,18 @@ struct
   let search e t =
     let rec aux = function
       | T.Leaf -> false
-      | T.Node (l, v, r) -> v = e || aux l || aux r
+      | T.Node (l, v, r) -> let cmp = T.E.cmp v e
+                            in if cmp = 0 then true
+                               else if cmp < 0 then aux r
+                               else aux l
     in aux t
            
   let rec insert e t = match t with
       T.Leaf -> T.Node (T.Leaf, e, T.Leaf)
-    | T.Node (l, v, r) -> if v = e then t
-                        else if v < e then T.Node (l, v, insert e r)
-                        else T.Node (insert e l, v, r)
+    | T.Node (l, v, r) -> let cmp = T.E.cmp v e
+                          in if cmp = 0 then t
+                             else if cmp < 0 then T.Node (l, v, insert e r)
+                             else T.Node (insert e l, v, r)
 
   let rec max = function
     | T.Leaf -> failwith "Tree is empty"
@@ -60,15 +64,15 @@ struct
                             
   let rec delete e = function
     | T.Leaf -> T.Leaf
-    | T.Node (l, v, r) ->
-       if v = e then
-         match l, r with
-           T.Leaf, T.Leaf -> T.Leaf
-         | T.Node _, T.Leaf -> l
-         | T.Leaf, T.Node _ -> r
-         | _ -> let lmax = max l
-                in T.Node (delete lmax l, lmax, r)
-       else if v < e then T.Node (l, v, delete e r)
-       else T.Node (delete e l, v, r)
+    | T.Node (l, v, r) -> let cmp = T.E.cmp v e
+                          in if cmp = 0 then
+                               match l, r with
+                                 T.Leaf, T.Leaf -> T.Leaf
+                               | T.Node _, T.Leaf -> l
+                               | T.Leaf, T.Node _ -> r
+                               | _ -> let lmax = max l
+                                      in T.Node (delete lmax l, lmax, r)
+                             else if cmp < 0 then T.Node (l, v, delete e r)
+                             else T.Node (delete e l, v, r)
 
 end;;

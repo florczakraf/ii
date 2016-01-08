@@ -1,4 +1,5 @@
-(*#load "graphics.cma";;*)
+
+(*ocamlc graphics.cma draw.cmo bintree.cmo bst.cmo test_bst.ml*)
 
 open Bst;;
 open Comparable;;
@@ -7,7 +8,8 @@ open Bintree;;
 module Int : COMPARABLE with type t = int =
 struct
   type t = int
-             
+
+  let cmp = compare
   let str = string_of_int
 end;;
 
@@ -24,7 +26,7 @@ let main () =
   in let b = B.insert 6 b
   in let b = B.insert 7 b
   in let b = B.insert 9 b
-     in ignore (B.draw_tree b)
+     in Draw.draw (module B) b
 
     
 let _ = main ()
