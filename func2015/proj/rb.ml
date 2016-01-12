@@ -45,32 +45,48 @@ struct
     let rec aux = function
       | Leaf _ -> false
       | Node (_, l, v, r) -> let cmp = T.E.cmp v e
-                            in if cmp = 0 then true
-                               else if cmp < 0 then aux r
-                               else aux l
+                             in if cmp = 0 then
+                                  true
+                                else if cmp < 0 then
+                                  aux r
+                                else
+                                  aux l
     in aux t
            
   let insert_balance_l c l v r =
+    print_endline "insert_balance_left";
     match c, l with
-      B, Node (R, Node (R, lll, llv, llr), lv, lr) -> Node (R, Node (B, lll, llv, llr), lv, Node (B, lr, v, r))
-    | B, Node (R, ll, lv, Node (R, lrl, lrv, lrr)) -> Node (R, Node (B, ll, lv, lrl), lrv, Node (B, lrr, v, r))
+    | B, Node (R, Node (R, lll, llv, llr), lv, lr) ->
+       Node (R, Node (B, lll, llv, llr), lv, Node (B, lr, v, r))
+    | B, Node (R, ll, lv, Node (R, lrl, lrv, lrr)) ->
+       Node (R, Node (B, ll, lv, lrl), lrv, Node (B, lrr, v, r))
     | _ -> Node (c, l, v, r)
 
 
   let insert_balance_r c l v r =
+    print_endline "insert_balance_right";
     match c, r with
-      B, Node (R, rl, rv, Node (R, rrl, rrv, rrr)) -> Node (R, Node (B, l, v, rl), rv, Node (B, rrl, rrv, rrr))
-    | B, Node (R, Node (R, rll, rlv, rlr), rv, rr) -> Node (R, Node (B, l, v, rll), rlv, Node (B, rlr, rv, rr))
-    | _ -> Node (c, l, v, r)
+    | B, Node (R, rl, rv, Node (R, rrl, rrv, rrr)) ->
+       print_endline "#1";
+       Node (R, Node (B, l, v, rl), rv, Node (B, rrl, rrv, rrr))
+    | B, Node (R, Node (R, rll, rlv, rlr), rv, rr) ->
+       print_endline "#2";
+       Node (R, Node (B, l, v, rll), rlv, Node (B, rlr, rv, rr))
+    | _ -> print_endline "#3";
+           Node (c, l, v, r)
 
   let insert e t =
     let rec aux = function
       | Leaf _ -> Node (R, Leaf B, e, Leaf B)
       | Node (c, l, v, r) ->
-         let cmp = T.E.cmp v e
-         in if cmp = 0 then Node (c, l, v, r)
-            else if cmp < 0 then insert_balance_r c l e (aux r)
-            else insert_balance_l c (aux l) e r
+         print_endline ("ins aux: v = " ^ (T.E.str v));
+         let cmp = T.E.cmp e v
+         in if cmp = 0 then
+              Node (c, l, v, r)
+            else if cmp < 0 then
+              insert_balance_l c (aux l) v r
+            else
+              insert_balance_r c l v (aux r)
     in match aux t with
        | Leaf _ -> assert false
        | Node (_, l, v, r) -> Node (B, l, v, r)
@@ -140,5 +156,62 @@ struct
        else
          node
     | Node (c, l, v, r) -> Node (c, l, v, r)
-                                   
+    | _ -> assert false
+
+  let rec delete_balance_r = function
+    | Node (B, Node (R, ll, lv, lr), v, r) as node ->
+       if is_bb r then
+         Node (B, ll, lv, delete_balance_r (Node (R, lr, v, r)))
+       else
+         node
+    | Node (c, Node (B, ll, lv, lr), v, r) as node ->
+       if is_bb r
+       then
+         if is_b ll && is_b lr then
+           add_b (Node (c, Node (R, ll, lv, lr), v, remove_b r))
+         else if is_b ll && is_r lr then
+           delete_balance_r (Node (c, Node (B, Node (R, ll, lv, left lr), value lr, right lr), v, r))
+         else
+           Node (c, add_b ll, lv, Node (B, lr, v, remove_b r))
+       else
+         node
+    | Node (c, l, v, r) -> Node (c, l, v, r)
+    | _ -> assert false
+
+  let delete e t =
+    let rec del e t =
+      let rec aux tree =
+        match tree with
+        | Node (R, Leaf _, v, Leaf _) ->
+           if T.E.cmp e v = 0 then Leaf B
+           else tree
+        | Node (B, Leaf _, v, Leaf _) ->
+           if T.E.cmp e v = 0 then Leaf BB
+           else tree
+        | Node (_, Leaf _, v, Node (_, rl, rv, rr)) ->
+           if T.E.cmp e v = 0 then
+             Node (B, rl, rv,rr)
+           else if T.E.cmp e rv = 0 then
+             Node (B, Leaf B, v, Leaf B)
+           else tree
+        | Node (_, Node (_, ll, lv, lr), v, Leaf _) ->
+           if T.E.cmp e v = 0 then
+             Node (B, ll, lv, lr)
+           else if T.E.cmp e lv = 0 then
+             Node (B, Leaf B, v, Leaf B)
+           else tree
+        | Node (c, l, v, r) ->
+           let cmp = T.E.cmp e v in
+           if cmp < 0 then
+             delete_balance_l (Node (c, aux l, v, r))
+           else if cmp > 0 then
+             delete_balance_r (Node (c, l, v, aux r))
+           else
+             delete_balance_r (Node (c, l, min r, del (min r) r))
+        | Leaf _ -> tree
+      in aux t
+    in match del e t with
+       | Leaf _ -> Leaf B
+       | Node (_, l, v, r) -> Node (B, l, v,r)
+
 end;;
