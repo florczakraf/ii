@@ -40,8 +40,8 @@
   \vfill
   
   {\large Wrocław, \today} \\ [0.5cm]
-  %{\large Wrocław, 6 listopada 2015} \\ [0.5cm]
-  {\large Wersja 0.1}
+
+  {\large Wersja 0.2}
 \end{center}
 
 \newpage
@@ -58,6 +58,7 @@
     \multicolumn{1}{|c|}{Opis} &
     \multicolumn{1}{|c|}{Autor} \\ \hline \hline
     2015-12-16 & 0.1 & Utworzenie dokumentu & Rafał Florczak \\ \hline
+    2016-01-13 & 0.2 & Naniesienie poprawek & Rafał Florczak \\ \hline
   \end{tabular}
 \end{center}
 
@@ -71,14 +72,14 @@
 
 \subsection{Cel dokumentu}
 \noindent
-Celem niniejszego dokumentu jest przedstawienie rozwiązań wybranych przez projektantów bazy danych. Opisany zostanie wybrany system zarządzania bazą danych oraz schemat relacji. Są one kluczowe dla sprawnego działania Recepcjonisty.
+Celem niniejszego dokumentu jest przedstawienie rozwiązań wybranych przez projektantów bazy danych. Dalej przedstawiono wybrany system zarządzania bazą danych oraz schemat relacji. Są one ważne, jeśli chodzi o sprawne działanie Recepcjonisty.
 
 Dokument jest przeznaczony dla programistów oraz osób, które będą zajmowały się utrzymaniem oprogramowania w przyszłości.
 
 \section{Baza danych}
 \subsection{System zarządzania bazą danych}
 \noindent
-Do przechowywania i nadzoru nad zasobami bazy danych wybrany został system PostgreSQL, ponieważ jest on darmowy, stabilny, szybki, popularny, a jego kod jest dostępny publicznie.
+Do przechowywania i nadzoru nad zasobami bazy danych wybrany został system PostgreSQL, ponieważ jest on bezpłatny, stabilny, szybki i popularny, a jego kod jest dostępny publicznie.
 
 \subsection{Schemat bazy danych}
 
@@ -90,29 +91,29 @@ Do przechowywania i nadzoru nad zasobami bazy danych wybrany został system Post
 
 \newpage
 \noindent
-Opis notacji: 
+Opis notacji zastosowanej na rys. 1: 
 \begin{itemize}
   \item podkreślenie --- klucz relacji,
   \item pogrubienie --- klucz główny relacji,
-  \item pochylenie --- klucz obcy,
+  \item kursywa --- klucz obcy,
   \item $\Diamond$---------> --- relacja jeden-do-wielu.
 \end{itemize}
 
-\subsubsection{Użytkownicy (users)}
+\subsubsection{Użytkownicy (\textit{users})}
 \noindent
-Tabela przechowuje informacje o wszystkich użytkownikach Recepcjonisty --- zarówno o klientach, jak i  jego obsłudze. Polem wartym uwagi jest \textit{access}, które oznacza poziom dostępu danego użytkownika.
+Tabela przechowuje informacje o wszystkich użytkownikach Recepcjonisty --- zarówno o klientach, jak i  jego obsłudze. Pole \textit{access} określa uprawnienia danego użytkownika.
 
-\subsubsection{Rezerwacje (bookings)}
+\subsubsection{Rezerwacje (\textit{bookings})}
 \noindent
-Relacja zawiera informacje o złożonych rezerwacjach (także tych zakończonych i anulowanych).
+Relacja zawiera informacje o rezerwacjach (także tych zakończonych i anulowanych).
 
-\subsubsection{Pokoje (rooms)}
+\subsubsection{Pokoje (\textit{rooms})}
 \noindent
-Tabela przedstawia dane o pokojach w hotelu. Informacja o liczbie łóżek została rozdzielona na dwa odrębne pola --- \textit{$single_{-}beds$} oraz \textit{$double_{-}beds$} oznaczające odpowiednio liczbę łóżek jednoosobowych i dwuosobowych.
+Tabela przedstawia dane o pokojach w hotelu. Informacje o liczbie łóżek zostały rozdzielone na dwa odrębne pola --- \textit{$single_{-}beds$} oraz \textit{$double_{-}beds$} oznaczające odpowiednio liczbę łóżek jednoosobowych i dwuosobowych.
 
-\subsubsection{Zdjęcia (pictures)}
+\subsubsection{Zdjęcia (\textit{pictures})}
 \noindent
-Relacja przechowuje ścieżki do zdjęć poszczególnych pokojów.
+Relacja przechowuje nazwy bezwzględne plików ze zdjęciami poszczególnych pokojów.
 
 
 \end{document}
