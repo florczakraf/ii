@@ -7,8 +7,8 @@
 #include <sys/wait.h>
 #include <sys/mman.h>
 
-#define N 4
-#define TARGET 10
+#define N 5
+#define TARGET 50
 
 #ifdef DEBUG
     #define DEB(x) x
@@ -70,7 +70,7 @@ void init_shared() // initiates shared memory
   }
 }
 
-void take_spoon(int i) // waits until philosopher #i can eat
+void take_fork(int i) // waits until philosopher #i can eat
 {
   sem_wait(&shared->mutex);
   shared->state[i] = hungry;
@@ -82,16 +82,21 @@ void take_spoon(int i) // waits until philosopher #i can eat
 
 int finished() // tests if all philosophers reached TARGET
 {
-  int c = N, i;
+  sem_wait(&shared->mutex);
+  int i;
   for (i = 0; i < N; i++)
   {
-    if (shared->ate[i] >= TARGET)
-      c--;
+    if (shared->ate[i] < TARGET)
+    {
+      sem_post(&shared->mutex);
+      return 0;
+    }
   }
-  return !c;
+  sem_post(&shared->mutex);
+  return 1;
 }
 
-void put_spoon(int i) // philosopher #i informs his neighbours that he finished eating
+void put_fork(int i) // philosopher #i informs his neighbours that he finished eating
 {
   sem_wait(&shared->mutex);
   shared->state[i] = thinking;
@@ -115,9 +120,9 @@ void philosopher(int i) // loop for each philosopher
   while(1)
   {
     usleep(50);
-    take_spoon(i);
+    take_fork(i);
     usleep(100);
-    put_spoon(i);
+    put_fork(i);
     usleep(50);
 
     if (finished())

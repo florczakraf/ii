@@ -31,7 +31,7 @@ filozofów.
 Testowanie
 -------
 W ramach testów ustaliłem docelową minimalną liczbę posiłków spożytych przez każdego filozofa potrzebną do zakończenia
-działania programu (`TARGET`). W załączonej wersji programu jest 4 filozofów, a `TARGET` wynosi 10. Niezależnie od
+działania programu (`TARGET`). W załączonej wersji programu jest 5 filozofów, a `TARGET` wynosi 50. Niezależnie od
 tego którą z metod opisanych w poprzednim punkcie użyjemy, na końcu działania programu wyświetli się zestawienie
 zawierające liczbę spożytych posiłków przez każdego z filozofów (patrz punkt następny).
 
@@ -39,17 +39,19 @@ Przykładowe wyniki działania programu:
 --------
 ```
 rf@rflaptop:~/ii/so2015/pracownia$ ./philosophers 
-Starting process with pid 12528
-Starting process with pid 12529
-Starting process with pid 12530
-Starting process with pid 12531
+Starting process with pid 14765
+Starting process with pid 14766
+Starting process with pid 14767
+Starting process with pid 14768
+Starting process with pid 14769
 -----RESULTS-----
-N = 4
-TARGET = 10
-Philosopher #1 ate 12 times
-Philosopher #2 ate 11 times
-Philosopher #3 ate 10 times
-Philosopher #4 ate 11 times
+N = 5
+TARGET = 50
+Philosopher #1 ate 54 times
+Philosopher #2 ate 52 times
+Philosopher #3 ate 50 times
+Philosopher #4 ate 50 times
+Philosopher #5 ate 51 times
 ```
 ```
 rf@rflaptop:~/ii/so2015/pracownia$ ./debug 
@@ -57,6 +59,7 @@ Starting process with pid 12550
 Starting process with pid 12551
 Starting process with pid 12552
 Starting process with pid 12553
+Starting process with pid 12554
 Philosopher #1 is hungry
 Philosopher #1 takes spoons: 4 and 1
 Philosopher #1 eats
@@ -65,11 +68,16 @@ Philosopher #3 is hungry
 
 (...)
 
+Philosopher #1 takes spoons: 5 and 1
+Philosopher #1 eats
+Philosopher #1 puts down spoons: 5 and 1
+Philosopher #1 thinks
 -----RESULTS-----
-N = 4
-TARGET = 10
-Philosopher #1 ate 11 times
-Philosopher #2 ate 10 times
-Philosopher #3 ate 10 times
-Philosopher #4 ate 11 times
+N = 5
+TARGET = 50
+Philosopher #1 ate 58 times
+Philosopher #2 ate 51 times
+Philosopher #3 ate 50 times
+Philosopher #4 ate 50 times
+Philosopher #5 ate 57 times
 ```
