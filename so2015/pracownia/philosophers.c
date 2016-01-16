@@ -36,7 +36,7 @@ inline int right (int i)
 typedef struct
 {
   sem_t mutex;
-  sem_t can_eat[N];
+  sem_t is_in_use[N];
   enum STATE state[N];
   int ate[N]; // to stop program eventually
 } shared_data;
@@ -48,10 +48,10 @@ void test(int i) // philosopher #i eats if he can
   if( shared->state[i] == hungry && shared->state[left(i)] != eating && shared->state[right(i)] != eating)
   {
     shared->state[i] = eating;
-    DEB(printf("Philosopher #%d takes spoon %d and %d\n", i + 1, left(i) + 1, i + 1));
+    DEB(printf("Philosopher #%d takes spoons: %d and %d\n", i + 1, left(i) + 1, i + 1));
     shared->ate[i] += 1;
     DEB(printf("Philosopher #%d eats\n", i + 1);)
-    sem_post(&shared->can_eat[i]);
+    sem_post(&shared->is_in_use[i]);
   }
 }
 
@@ -64,7 +64,7 @@ void init_shared() // initiates shared memory
   sem_init(&shared->mutex, 1, 1);
   for(i = 0; i < N; i++)
   {
-    sem_init(&shared->can_eat[i], 1, 1);
+    sem_init(&shared->is_in_use[i], 1, 1);
     shared->state[i] = thinking;
     shared->ate[i] = 0;
   }
@@ -77,7 +77,7 @@ void take_spoon(int i) // waits until philosopher #i can eat
   DEB(printf("Philosopher #%d is hungry\n", i + 1);)
   test(i);
   sem_post(&shared->mutex);
-  sem_wait(&shared->can_eat[i]);
+  sem_wait(&shared->is_in_use[i]);
 }
 
 int finished() // tests if all philosophers reached TARGET
@@ -91,18 +91,19 @@ int finished() // tests if all philosophers reached TARGET
   return !c;
 }
 
-void put_spoon(int i) // philosopher #i informs his neighbours that the finished eating
+void put_spoon(int i) // philosopher #i informs his neighbours that he finished eating
 {
   sem_wait(&shared->mutex);
   shared->state[i] = thinking;
-  DEB(printf("Philosopher #%d puts down spoon %d and %d\n", i + 1, left(i) + 1, i + 1));
+  DEB(printf("Philosopher #%d puts down spoons: %d and %d\n", i + 1, left(i) + 1, i + 1));
 
   DEB(if (shared->ate[i] == TARGET)
   {
-    printf("Philosopher #%d finished reached target\n", i + 1);
+    printf("Philosopher #%d reached target\n", i + 1);
   })
   
   DEB(printf("Philosopher #%d thinks\n", i + 1));
+
   test(left(i));
   test(right(i));
   
@@ -129,7 +130,8 @@ int main(void)
   int i;
   pid_t pid, pids[N];
   init_shared();
-  for(i = 0; i < N; ++i)
+
+  for(i = 0; i < N; i++)
   {
     pid = fork();
     if(pid == 0)
@@ -146,12 +148,12 @@ int main(void)
     }
     else
     {
-      perror("fork");
-      _exit(0);
+      perror("There was an error while fork operation");
+      exit(0);
     }
   }
 
-  for(i = 0; i < N; i++)
+  for(i = 0; i < N; i++) // waiting until all children are done
     waitpid(pids[i], NULL, 0);
 
   printf("-----RESULTS-----\nN = %d\nTARGET = %d\n", N, TARGET);
@@ -162,8 +164,9 @@ int main(void)
   }
 
   //cleaning
-  for(i = 0; i < N; ++i)
-    sem_destroy(&shared->can_eat[i]);
+  for(i = 0; i < N; i++)
+    sem_destroy(&shared->is_in_use[i]);
+  sem_destroy(&shared->mutex);
   munmap(shared, sizeof(*shared));
 
   return 0;
