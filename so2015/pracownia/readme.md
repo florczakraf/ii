@@ -10,17 +10,15 @@ czekał na *1* i tak dalej.
 
 Rozwiązanie
 -----
-Rozwiązanie oparłem na bazie pomysłu Tannenbauma opisanego tutaj: https://www.cs.indiana.edu/classes/p415-sjoh/hw/project/dining-philosophers/index.htm
+Rozwiązanie oparłem na bazie pomysłu Tannenbauma opisanego tutaj:
+https://www.cs.indiana.edu/classes/p415-sjoh/hw/project/dining-philosophers/index.htm
 
-W dużym skrócie: Stworzyłem *N + 1* semaforów: po jednym dla każdego widelca oraz jeden do nadzorowania wzajemnego 
+W skrócie: stworzyłem *N + 1* semaforów: po jednym dla każdego widelca oraz jeden do nadzorowania wzajemnego 
 wykluczenia dostępu do sekcji krytycznej. Każdy filozof znajduje się w jednym z 3 stanów: *jedzenia*, *rozmyślania* albo 
-*bycia głodnym*. Aby filozof *i* mógł przejść ze stanu *bycia głodym* do *jedzenia*, jego sąsiedzi nie mogą się znajdować
-w stanie *jedzenia*. Gdy jakiś filozof kończy jedzenie, to odkłada oba widelce i informuje o tym fakcie swoich sąsiadów.
-
-Testowanie
--------
-W ramach testów ustaliłem docelową minimalną liczbę posiłków spożytych przez każdego filozofa potrzebną do zakończenia
-działania programu. W załączonej wersji programu wynosi ona 10.
+*bycia głodnym*. Stanem początkowym każdego filozofa jest *rozmyślanie*. Po jakimś czasie dochodzi do wniosku, że coś by
+zjadł, więc przechodzi w stan *bycia głodnym*. Aby filozof *i* mógł przejść ze stanu *bycia głodym* do *jedzenia*, 
+jego sąsiedzi nie mogą się znajdować w stanie *jedzenia*. Gdy jakiś filozof kończy jedzenie, to odkłada oba widelce 
+i informuje o tym fakcie swoich sąsiadów i wraca do *rozmyślania*.
 
 Sposób użycia
 -----
@@ -29,6 +27,13 @@ Aby skompilować program w wersji, która nie wypisuje zmian stanów poszczegól
 
 Inną możliwością jest użycie polecenia `make debug`, a następnie `./debug`. W tej wersji program wypisuje zmiany stanów 
 filozofów, a także wprowadza opóźnienia między kolejnymi funkcjami.
+
+Testowanie
+-------
+W ramach testów ustaliłem docelową minimalną liczbę posiłków spożytych przez każdego filozofa potrzebną do zakończenia
+działania programu (`TARGET`). W załączonej wersji programu jest 4 filozofów, a `TARGET` wynosi 10. Niezależnie od
+tego którą z metod opisanych w poprzednim punkcie użyjemy, na końcu działania programu wyświetli się zestawienie
+zawierające liczbę spożytych posiłków przez każdego z filozofów (patrz punkt następny).
 
 Przykładowe wyniki działania programu:
 --------
