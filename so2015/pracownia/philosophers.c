@@ -114,11 +114,11 @@ void philosopher(int i) // loop for each philosopher
 {
   while(1)
   {
-    DEB(sleep(1));
+    usleep(50);
     take_spoon(i);
-    DEB(sleep(1));
+    usleep(100);
     put_spoon(i);
-    DEB(sleep(1));
+    usleep(50);
 
     if (finished())
       return;

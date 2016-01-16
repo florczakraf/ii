@@ -26,7 +26,7 @@ Aby skompilować program w wersji, która nie wypisuje zmian stanów poszczegól
 `make`. Po skompilowaniu program można uruchomić przy użyciu `./philosophers`
 
 Inną możliwością jest użycie polecenia `make debug`, a następnie `./debug`. W tej wersji program wypisuje zmiany stanów 
-filozofów, a także wprowadza opóźnienia między kolejnymi zmianami stanów.
+filozofów.
 
 Testowanie
 -------
@@ -46,10 +46,10 @@ Starting process with pid 12531
 -----RESULTS-----
 N = 4
 TARGET = 10
-Philosopher #1 ate 69 times
-Philosopher #2 ate 21 times
+Philosopher #1 ate 12 times
+Philosopher #2 ate 11 times
 Philosopher #3 ate 10 times
-Philosopher #4 ate 2834 times
+Philosopher #4 ate 11 times
 ```
 ```
 rf@rflaptop:~/ii/so2015/pracownia$ ./debug 
@@ -58,7 +58,7 @@ Starting process with pid 12551
 Starting process with pid 12552
 Starting process with pid 12553
 Philosopher #1 is hungry
-Philosopher #1 takes spoon 4 and 1
+Philosopher #1 takes spoons: 4 and 1
 Philosopher #1 eats
 Philosopher #2 is hungry
 Philosopher #3 is hungry
@@ -68,8 +68,8 @@ Philosopher #3 is hungry
 -----RESULTS-----
 N = 4
 TARGET = 10
-Philosopher #1 ate 12 times
-Philosopher #2 ate 13 times
+Philosopher #1 ate 11 times
+Philosopher #2 ate 10 times
 Philosopher #3 ate 10 times
 Philosopher #4 ate 11 times
 ```
