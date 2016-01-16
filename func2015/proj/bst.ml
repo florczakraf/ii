@@ -54,12 +54,12 @@ struct
 
   let rec max = function
     | T.Leaf -> failwith "Tree is empty"
-    | T.Node (_, v, Leaf) -> v
+    | T.Node (_, v, T.Leaf) -> v
     | T.Node (_, _, r) -> max r
 
   let rec min = function
     | T.Leaf -> failwith "Tree is empty"
-    | T.Node (Leaf, v, _) -> v
+    | T.Node (T.Leaf, v, _) -> v
     | T.Node (l, _, _) -> min l
                             
   let rec delete e = function
