@@ -26,7 +26,7 @@ Aby skompilować program w wersji, która nie wypisuje zmian stanów poszczegól
 `make`. Po skompilowaniu program można uruchomić przy użyciu `./philosophers`
 
 Inną możliwością jest użycie polecenia `make debug`, a następnie `./debug`. W tej wersji program wypisuje zmiany stanów 
-filozofów, a także wprowadza opóźnienia między kolejnymi funkcjami.
+filozofów, a także wprowadza opóźnienia między kolejnymi zmianami stanów.
 
 Testowanie
 -------
