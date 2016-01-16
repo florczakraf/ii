@@ -5,8 +5,8 @@ Opis
 ----
 *N* filozofów siedzi wokół okrągłego stołu. Między każdą parą sąsiadów znajduje się widelec.
 Do zjedzenia posiłku potrzebne są dwa widelce. Gdy każdy filozof weźmie widelec po swojej prawej
-stronie dojdzie do zakleszczenia, ponieważ *1* będzie czekał aż *N* zwolni swój widelec, *2* będzie
-czekał na *1* i tak dalej.
+stronie dojdzie do zakleszczenia, ponieważ pierwszy będzie czekał aż N-ty zwolni swój widelec, drugi będzie
+czekał na pierwszego i tak dalej.
 
 Rozwiązanie
 -----
@@ -15,10 +15,10 @@ https://www.cs.indiana.edu/classes/p415-sjoh/hw/project/dining-philosophers/inde
 
 W skrócie: stworzyłem *N + 1* semaforów: po jednym dla każdego widelca oraz jeden do nadzorowania wzajemnego 
 wykluczenia dostępu do sekcji krytycznej. Każdy filozof znajduje się w jednym z 3 stanów: *jedzenia*, *rozmyślania* albo 
-*bycia głodnym*. Stanem początkowym każdego filozofa jest *rozmyślanie*. Po jakimś czasie dochodzi do wniosku, że coś by
-zjadł, więc przechodzi w stan *bycia głodnym*. Aby filozof *i* mógł przejść ze stanu *bycia głodym* do *jedzenia*, 
+*bycia głodnym*. Stanem początkowym każdego filozofa jest *rozmyślanie*. Po jakimś czasie filozof dochodzi do wniosku, 
+że coś by zjadł, więc przechodzi w stan *bycia głodnym*. Aby filozof *i* mógł przejść ze stanu *bycia głodym* do *jedzenia*, 
 jego sąsiedzi nie mogą się znajdować w stanie *jedzenia*. Gdy jakiś filozof kończy jedzenie, to odkłada oba widelce 
-i informuje o tym fakcie swoich sąsiadów i wraca do *rozmyślania*.
+i informuje o tym fakcie swoich sąsiadów, a następnie wraca do *rozmyślania*.
 
 Sposób użycia
 -----
@@ -68,9 +68,8 @@ Philosopher #3 is hungry
 -----RESULTS-----
 N = 4
 TARGET = 10
-Philosopher #1 ate 10 times
-Philosopher #2 ate 10 times
+Philosopher #1 ate 12 times
+Philosopher #2 ate 13 times
 Philosopher #3 ate 10 times
 Philosopher #4 ate 11 times
 ```
-
