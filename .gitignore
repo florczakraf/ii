@@ -7,3 +7,5 @@
 *.out
 *.cmi
 *.cmo
+philosophers
+debug

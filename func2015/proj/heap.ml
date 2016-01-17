@@ -9,13 +9,11 @@ sig
   type t
 
   val empty: unit -> t
-  val rank: t -> int
-  val merge: t -> t -> t
   val is_empty: t -> bool
   val insert: e -> t -> t
   val delete_min: t -> t
   val min: t -> e
-  val to_tree: t -> tree
+  val to_bintree: t -> tree
 end;;
   
 module Heap (T : BINTREE) : HEAP with module T = T =
@@ -27,9 +25,9 @@ struct
 
   let empty () = Leaf
                    
-  let rec to_tree = function
+  let rec to_bintree = function
     | Leaf -> T.Leaf
-    | Node (_, l, v, r) -> T.Node (to_tree l, v, to_tree r)
+    | Node (_, l, v, r) -> T.Node (to_bintree l, v, to_bintree r)
                                  
   let is_empty = function
     | Leaf -> true

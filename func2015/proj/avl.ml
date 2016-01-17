@@ -13,6 +13,8 @@ sig
   val insert: e -> t -> t
   val delete: e -> t -> t
   val search: e -> t -> bool
+  val min: t -> e
+  val max: t -> e
 
   val to_bintree: t -> tree
 end;;
@@ -42,9 +44,12 @@ struct
     let rec aux = function
       | Leaf -> false
       | Node (_, l, v, r) -> let cmp = T.E.cmp v e
-                             in if cmp = 0 then true
-                                else if cmp < 0 then aux r
-                                else aux l
+                             in if cmp = 0 then
+                                  true
+                                else if cmp < 0 then
+                                  aux r
+                                else
+                                  aux l
     in aux t
 
   let depth_diff l r = depth l - depth r
@@ -57,32 +62,38 @@ struct
 
   let balance l v r =
     let diff_lr = depth_diff l r
-    in if abs diff_lr <= 1 then make_node l v r
+    in if abs diff_lr <= 1 then
+         make_node l v r
        else if diff_lr = 2 then
          match l with
-           Leaf -> failwith "impossible"
+           Leaf -> assert false
          | Node (_, ll, lv, lr) -> if depth_diff ll lr = (-1) then
                                      match lr with
-                                       Leaf -> failwith "impossible"
+                                       Leaf -> assert false
                                      | Node (_, lrl, lrv, lrr) ->
                                         make_node (make_node ll lv lrl) lrv (make_node lrr v r)
                                    else make_node ll lv (make_node lr v r)
-       else match r with
-              Leaf -> failwith "impossible"
-            | Node (_, rl, rv, rr) -> if depth_diff rl rr = 1 then
-                                        match rl with
-                                          Leaf -> failwith "impossible"
-                                        | Node (_, rll, rlv, rlr) ->
-                                           make_node (make_node l v rll) rlv (make_node rlr rv rr)
-                                      else make_node (make_node l v rl) rv rr
+       else
+         match r with
+           Leaf -> assert false
+         | Node (_, rl, rv, rr) -> if depth_diff rl rr = 1 then
+                                     match rl with
+                                       Leaf -> assert false
+                                     | Node (_, rll, rlv, rlr) ->
+                                        make_node (make_node l v rll) rlv (make_node rlr rv rr)
+                                   else
+                                     make_node (make_node l v rl) rv rr
                                                      
                                                      
   let rec insert e t = match t with
       Leaf -> make_node Leaf e Leaf
     | Node (_, l, v, r) -> let cmp = T.E.cmp v e
-                           in if cmp = 0 then t
-                              else if cmp > 0 then balance (insert e l) v r
-                              else balance l v (insert e r)
+                           in if cmp = 0 then
+                                t
+                              else if cmp > 0 then
+                                balance (insert e l) v r
+                              else
+                                balance l v (insert e r)
 
 
   let rec max = function

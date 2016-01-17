@@ -9,7 +9,7 @@ Usage
 Notes
 -----
 
-In splay.ml all occurences of
+In `splay.ml` all occurences of
 ```ocaml
 let T.Node (l, v, r) = splay e !t in
 ```

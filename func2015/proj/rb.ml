@@ -14,6 +14,8 @@ sig
   val insert: e -> t -> t
   val delete: e -> t -> t
   val search: e -> t -> bool
+  val min: t -> e
+  val max: t -> e
 
   val to_bintree: t -> tree
 end;;
@@ -54,7 +56,6 @@ struct
     in aux t
            
   let insert_balance_l c l v r =
-    print_endline "insert_balance_left";
     match c, l with
     | B, Node (R, Node (R, lll, llv, llr), lv, lr) ->
        Node (R, Node (B, lll, llv, llr), lv, Node (B, lr, v, r))
@@ -64,22 +65,17 @@ struct
 
 
   let insert_balance_r c l v r =
-    print_endline "insert_balance_right";
     match c, r with
     | B, Node (R, rl, rv, Node (R, rrl, rrv, rrr)) ->
-       print_endline "#1";
        Node (R, Node (B, l, v, rl), rv, Node (B, rrl, rrv, rrr))
     | B, Node (R, Node (R, rll, rlv, rlr), rv, rr) ->
-       print_endline "#2";
        Node (R, Node (B, l, v, rll), rlv, Node (B, rlr, rv, rr))
-    | _ -> print_endline "#3";
-           Node (c, l, v, r)
+    | _ -> Node (c, l, v, r)
 
   let insert e t =
     let rec aux = function
       | Leaf _ -> Node (R, Leaf B, e, Leaf B)
       | Node (c, l, v, r) ->
-         print_endline ("ins aux: v = " ^ (T.E.str v));
          let cmp = T.E.cmp e v
          in if cmp = 0 then
               Node (c, l, v, r)
