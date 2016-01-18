@@ -1,0 +1,151 @@
+%%%%%%%%
+\documentclass [11pt, a4paper, leqno] {article}
+\usepackage [polish] {babel}
+\usepackage {polski}
+\usepackage [utf8] {inputenc}
+\usepackage [T1] {fontenc}
+\usepackage {indentfirst}
+\usepackage {setspace}
+\usepackage {amstext}
+\usepackage {amsfonts}
+\setstretch {1.15} %interlinia
+\frenchspacing
+\renewcommand {\thesection} {\arabic{section}.}
+\renewcommand {\thesubsection} {\arabic{section}. \arabic{subsection}.}
+\renewcommand {\thesubsubsection} {\arabic{section}. \arabic{subsection}. \arabic{subsubsection}.}
+\textheight 610pt
+\makeatletter
+\renewcommand\@biblabel[1]{#1}
+\makeatother
+\usepackage[a4paper,left=3.8cm,right=3.8cm,top=3.3cm,bottom=3cm]{geometry}
+%%%%%%%%
+
+\begin{document}
+% STRONA TYTUŁOWA
+
+\begin{center}
+  \thispagestyle{empty} %usunięcie numeracji
+  {\large Studencka Pracownia Inżynierii Oprogramowania} \\ [0.5cm]
+	{\large Instytut Informatyki Uniwersytetu Wrocławskiego} \\ [6.0cm]
+
+  {\large Rafał Florczak, Dominik Rabij} \\ [1.5cm]
+
+	{\huge Dokumentacja oprogramowania} \\ [0.5cm]
+  {\huge RECEPCJONISTA} \\ [1.5cm]
+
+  {\large Słownik} \\ [0.5cm]
+
+  \vfill
+  
+  %{\large Wrocław, \today} \\ [0.5cm]
+  {\large Wrocław, 16 stycznia 2016} \\ [0.5cm]
+  {\large Wersja 0.1}
+\end{center}
+
+\newpage
+
+% TABELKA WERSJI
+
+\textit{Tabela 0.} Historia zmian dokonanych w dokumencie
+
+\begin{center}
+  \begin{tabular}{| l | l | l | l |}
+    \hline
+    \multicolumn{1}{|c|}{Data} & 
+    \multicolumn{1}{|c|}{Numer wersji} &  
+    \multicolumn{1}{|c|}{Opis} &
+    \multicolumn{1}{|c|}{Autor} \\ \hline \hline
+    2016-01-16 & 0.1 & Utworzenie dokumentu & Dominik Rabij \\ \hline
+  \end{tabular}
+\end{center}
+
+%\medskip
+
+%\tableofcontents
+
+\newpage
+
+\section{Słownik}
+\begin{description}
+\item[access] --- pole określające poziom uprawnień użytkownika. Może przyjmować następujące wartości: normal, moderator, admin.
+
+\item[admin] --- poziom uprawnień bez ograniczeń.
+
+\item[bathrooms] --- pole zawierające liczbę łazienek w danym pokoju.
+
+\item[baza danych] --- system przechowujący dane w formie tabel w zgodności z określonymi zasadami. 
+
+\item[booked] --- rezerwacja, która nie została jeszcze potwierdzona przez uprawnionego pracownika hotelu.
+
+\item[booking$_{-}$id] --- pole z unikalnym numerem identyfikacyjnym rezerwacji.
+
+\item[bookings] --- tabela zawierająca informacje o rezerwacjach.
+
+\item[canceled] --- rezerwacja, która została anulowana.
+
+\item[date] --- data.
+
+\item[description] --- pole zawierające opis pokoju, na przykład informacje o dodatkowym wyposażeniu, czy balkonie.
+
+\item[double$_{-}$beds] --- pole określające liczbę łóżek dwuosobowych w pokoju.
+
+\item[end$_{-}$date] --- pole z datą zakończenia rezerwacji pokoju.
+
+\item[enumerable] --- typ wyliczeniowy.
+
+\item[finished] --- rezerwacja, która zakończyła się powodzeniem.
+
+\item[first$_{-}$name] --- pole zawierające imię użytkownika.
+
+\item[floor] --- pole przechowujące numer piętra, na którym znajduje się dany pokój.
+
+\item[implementacja] --- proces pisania kodu źródłowego programu.
+
+\item[integer] --- liczba całkowita.
+
+\item[last$_{-}$name] --- pole zawierające nazwisko użytkownika.
+
+\item[moderator] --- poziom uprawnień pozwalający użytkownikowi na zarządzanie rezerwacjami oraz pokojami.
+
+\item[normal] --- poziom uprawnień użytkownika, który pozwala na składanie rezerwacji. Umożliwia także przeglądanie i modyfikację istniejących rezerwacji, których twórcą jest użytkownik z tymi uprawnieniami.
+
+\item[password] --- pole z posolonym hasłem użytkownika.
+
+\item[path] --- pole przechowujące nazwy bezwzględne plików ze zdjęciami poszczególnych pokojów.
+
+\item[phone] --- pole zawierające numer telefonu użytkownika.
+
+\item[picture$_{-}$id] --- pole z unikalnym numerem identyfikacyjnym obrazka.
+
+\item[pictures] --- tabela z informacjami o obrazkach wykorzystywanych w interfejsie graficznym Recepcjonisty.
+
+\item[pole] --- najmniejsza część wiersza tabeli, która przechowuje pojedynczą daną.
+
+\item[room$_{-}$id] --- pole z unikalnym numerem identyfikacyjnym pokoju.
+
+\item[room$_{-}$number] --- pole z numerem pokoju.
+
+\item[rooms] --- tabela z informacjami o pokojach hotelowych.
+
+\item[single$_{-}$beds] --- pole określające liczbę łóżek jednoosobowych w pokoju.
+
+\item[solenie] --- proces dodawania losowych danych do hasła w celu poprawy bezpieczeństwa.
+
+\item[start$_{-}$date] --- pole zawierające datę rozpoczęcia rezerwacji pokoju.
+
+\item[state] --- pole określające stan rezerwacji. Może przyjmować następujące wartości: booked, verified, finished, canceled.
+
+\item[string] --- napis.
+
+\item[system zarządzania bazą danych] --- system komunikujący się z bazą danych, który służy między innymi do odczytu i modyfikacji jej zawartości.
+
+\item[user$_{-}$id] --- pole z unikalnym numerem identyfikacyjnym użytkownika systemu.
+
+\item[users] --- tabela z danymi użytkowników.
+
+\item[użytkownik] --- każda osoba korzystająca z Recepcjonisty.
+
+\item[verified] --- rezerwacja potwierdzona przez uprawnionego pracownika hotelu.
+
+\end{description}
+\end{document}
