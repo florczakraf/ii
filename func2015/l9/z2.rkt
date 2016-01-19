@@ -4,9 +4,11 @@
 
 (define (count-atoms lst)
   (cond ((null? lst) 0)
-        ((atom? lst) 1)
         (else
-         (+ (count-atoms (car lst))
-            (count-atoms (cdr lst))))))
+         (let
+             ((result (count-atoms (cdr lst))))
+           (if (atom? (car lst))
+               (+ 1 result)
+               result)))))
 
-(count-atoms (list 1 (cons (cons 2 3) 4) 5 6))
+(count-atoms '(1 (cons (cons 2 3) 4) "aaa" 9))
