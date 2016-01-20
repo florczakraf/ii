@@ -16,7 +16,7 @@
 
 ;for basic derivation
 (define (derivative expr var)
-  (cond ((eqv? expr var) 1)
+  (cond ((eq? expr var) 1)
         ((list? expr)
          (let
              ([left (cadr expr)]
@@ -70,3 +70,7 @@
 (derivative '(* x y) 'x)
 (deriv '(* (* x y) (+ x 3)) 'x)
 (derivative '(* (* x y) (+ x 3)) 'x)
+
+(deriv 'x 'x)
+(deriv 'y 'x)
+(deriv '(* (+ 3.4 5) (* x x)) 'x)
