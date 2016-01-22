@@ -8,7 +8,6 @@ sig
   type t = tree ref
                 
   val empty: unit -> t
-  val depth: t -> int
   val is_empty: t -> bool
   val insert: e -> t -> t
   val delete: e -> t -> t
@@ -35,8 +34,6 @@ struct
     | T.Leaf -> true
     | _ -> false
 
-  let depth t = T.depth !t
-           
   let rec max = function
     | T.Leaf -> failwith "Tree is empty"
     | T.Node (_, v, T.Leaf) -> v

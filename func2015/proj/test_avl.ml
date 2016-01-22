@@ -24,8 +24,12 @@ let graphics () =
   in Draw.draw (module A) a; let a = A.insert 3 a
   in Draw.draw (module A) a; let a = A.insert 2 a
   in Draw.draw (module A) a; let a = A.insert 1 a
-  in Draw.draw (module A) a;
-  let a = A.delete 7 a
+  in Draw.draw (module A) a; let a = A.delete 7 a
+  in Draw.draw (module A) a; let a = A.delete 4 a
+  in Draw.draw (module A) a; let a = A.delete 3 a
+  in Draw.draw (module A) a; let a = A.delete 2 a
+  in Draw.draw (module A) a; let a = A.delete 6 a
+  in Draw.draw (module A) a; let a = A.delete 1 a
   in Draw.draw (module A) a
 
 

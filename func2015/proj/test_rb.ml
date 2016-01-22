@@ -16,7 +16,7 @@ module R = Rb(Bint);;
 
 let graphics () =
   let r = R.empty ()
-  in Draw.draw (module R) r; let r = R.insert 5 r
+  in let r = R.insert 5 r
   in Draw.draw (module R) r; let r = R.insert 6 r
   in Draw.draw (module R) r; let r = R.insert 7 r
   in Draw.draw (module R) r; let r = R.insert 8 r
@@ -24,8 +24,13 @@ let graphics () =
   in Draw.draw (module R) r; let r = R.insert 3 r
   in Draw.draw (module R) r; let r = R.insert 2 r
   in Draw.draw (module R) r; let r = R.insert 1 r
-  in Draw.draw (module R) r;
-  let r = R.delete 7 r
+  in Draw.draw (module R) r; let r = R.delete 7 r
+  in Draw.draw (module R) r; let r = R.delete 4 r
+  in Draw.draw (module R) r; let r = R.delete 2 r
+  in Draw.draw (module R) r; let r = R.delete 8 r
+  in Draw.draw (module R) r; let r = R.delete 1 r
+  in Draw.draw (module R) r; let r = R.delete 3 r
+  in Draw.draw (module R) r; let r = R.delete 5 r                        
   in Draw.draw (module R) r
 
 
