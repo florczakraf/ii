@@ -1,4 +1,4 @@
-## Modules
+# Modules
 
 ##### AVL (avl.ml)
 Implements: `empty`, `depth`, `is_empty`, `insert`, `delete`, `search`, `min`, `max`, `to_bintree` 
@@ -37,7 +37,7 @@ Each test consists of two parts:
 * first is testing functions that are easy to test without knowledge of tree structure,
 * second uses `Draw` module to visualise tree after each operation.
 
-## Usage
+# Usage
 
 * `./make.sh` -- compile all modules,
 * `./make.sh clean` -- delete compiled files,
@@ -67,8 +67,9 @@ And finally create desired module. For example:
 ```ocaml
 module A = Avl(Bint);;
 ```
+For usage examples head to `test_MODULE.ml` files.
 
-## Notes
+# Notes
 
 In `splay.ml` all occurences of
 ```ocaml
