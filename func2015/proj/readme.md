@@ -41,7 +41,7 @@ Each test consists of two parts:
 
 * `./make.sh` -- compile all modules,
 * `./make.sh clean` -- delete compiled files,
-* `./make.sh test` -- compile and run all test files (some tests are interactive -- so you can see how tree changes after each operation).
+* `./make.sh test` -- run all test files (some tests are interactive -- so you can see how tree changes after each operation).
 
 To use any of these modules you have to include
 ```ocaml
