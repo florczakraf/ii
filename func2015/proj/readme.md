@@ -15,12 +15,33 @@ Implements: `empty`, `depth`, `is_empty`, `insert`, `delete`, `search`, `min`, `
 ##### Splay (splay.ml)
 Implements: `empty`, `is_empty`, `insert`, `delete`, `search`, `min`, `max`, `to_bintree`
 
+##### Comparable (comparable.mli)
+Interface for module that is required as base for Bintree module. Comparable module requires type `t`,
+and two functions: 
+* `str` -- string of `t`,
+* `cmp` -- the same as built-in compare but for type `t`.
+
+#### Bintree (bintree.ml)
+Definition of `Bintree (E : COMPARABLE)` functor which is base for all of tree modules.
+
+#### Draw (draw.ml)
+Defines function `draw (S : BINSTRUCT) s` that is able to draw any binary tree data structure
+that implements `BINSTRUCT` (also defined there) where `s` is structure that will appear on screen.
+
+#### Helpers (helpers.ml)
+Set of functions used in tests. `assert_failure` tests if given statement's result is `Failure _`. 
+Rest are used to simplify writing test results.
+
+#### tests for data structures (test_MODULE.ml)
+Each test consists of two parts:
+* first is testing functions that are easy to test without knowledge of tree structure,
+* second uses `Draw` module to visualise tree after each operation.
 
 ## Usage
 
-* `./make.sh` -- compile all modules
-* `./make.sh clean` -- delete compiled files
-* `./make.sh test` -- compile and run all test files (some tests are interactive -- so you can see how tree changes after each operation)
+* `./make.sh` -- compile all modules,
+* `./make.sh clean` -- delete compiled files,
+* `./make.sh test` -- compile and run all test files (some tests are interactive -- so you can see how tree changes after each operation).
 
 To use any of these modules you have to include
 ```ocaml
