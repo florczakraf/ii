@@ -13,7 +13,7 @@ Rozwiązanie
 Rozwiązanie oparłem na bazie pomysłu Tannenbauma opisanego tutaj:
 https://www.cs.indiana.edu/classes/p415-sjoh/hw/project/dining-philosophers/index.htm
 
-W skrócie: stworzyłem *N + 1* semaforów: po jednym dla każdego widelca oraz jeden do nadzorowania wzajemnego 
+W skrócie: utworzyłem *N + 1* semaforów – po jednym dla każdego widelca oraz jeden do nadzorowania wzajemnego 
 wykluczenia dostępu do sekcji krytycznej. Każdy filozof znajduje się w jednym z 3 stanów: *jedzenia*, *rozmyślania* albo 
 *bycia głodnym*. Stanem początkowym każdego filozofa jest *rozmyślanie*. Po jakimś czasie filozof dochodzi do wniosku, 
 że coś by zjadł, więc przechodzi w stan *bycia głodnym*. Aby filozof *i* mógł przejść ze stanu *bycia głodym* do *jedzenia*, 
@@ -22,7 +22,9 @@ i informuje o tym fakcie swoich sąsiadów, a następnie wraca do *rozmyślania*
 
 Sposób użycia
 -----
-Aby skompilować program w wersji, która nie wypisuje zmian stanów poszczególnych filozofów należy użyć polecenia
+Program został stworzony pod system Linux.
+
+Aby skompilować program w wersji, która nie wypisuje zmian stanów poszczególnych filozofów, należy użyć polecenia
 `make`. Po skompilowaniu program można uruchomić przy użyciu `./philosophers`
 
 Inną możliwością jest użycie polecenia `make debug`, a następnie `./debug`. W tej wersji program wypisuje zmiany stanów 
@@ -37,6 +39,7 @@ zawierające liczbę spożytych posiłków przez każdego z filozofów (patrz pu
 
 Przykładowe wyniki działania programu:
 --------
+Wersja podstawowa, bez wypisywania zmian stanów filozofów:
 ```
 rf@rflaptop:~/ii/so2015/pracownia$ ./philosophers 
 Starting process with pid 14765
@@ -53,6 +56,8 @@ Philosopher #3 ate 50 times
 Philosopher #4 ate 50 times
 Philosopher #5 ate 51 times
 ```
+
+Wersja z wypisywaniem na ekran zmian stanów filozofów:
 ```
 rf@rflaptop:~/ii/so2015/pracownia$ ./debug 
 Starting process with pid 12550
