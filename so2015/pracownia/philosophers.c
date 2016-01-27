@@ -1,3 +1,9 @@
+/*
+Obowiązkowe zadanie na część pracownianą z przedmiotu Systemy operecyjne
+Autor: Rafał Florczak
+Problem: Ucztujący filozofowie
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <semaphore.h>
