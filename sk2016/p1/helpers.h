@@ -31,7 +31,7 @@ void err(const char * msg, int val);
 u_int16_t compute_icmp_checksum (const void * buff, int length);
 void traceroute(int sockfd, struct sockaddr_in address);
 void print_addresses(struct in_addr * addresses, int received);
-void send_icmps_with_ttl(int sockfd, struct sockaddr_in address, uint8_t ttl);
-bool receive_icmps(int sockfd, uint8_t ttl, struct in_addr * received_addresses, size_t * received, time_t * avg);
+void send_icmps_with_ttl(int sockfd, const struct sockaddr_in address, uint8_t ttl);
+bool receive_icmps(int sockfd, uint8_t ttl, struct in_addr * received_addresses, int * received, time_t * avg);
 
 #endif

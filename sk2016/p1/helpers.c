@@ -30,7 +30,7 @@ u_int16_t compute_icmp_checksum (const void * buff, int length)
 void traceroute(int sockfd, struct sockaddr_in address)
 {
   struct in_addr received_addresses[PER_TTL];
-  size_t received;
+  int received;
   time_t avg;
   bool reached = false;
   
@@ -59,7 +59,7 @@ int addr_cmp(const void * l, const void * r)
 
 void print_addresses(struct in_addr * addresses, int received)
 {
-  qsort (addresses, received, sizeof(* addresses), addr_cmp);
+  qsort(addresses, received, sizeof(* addresses), addr_cmp);
   
   if (received == 0)
   {
@@ -77,7 +77,7 @@ void print_addresses(struct in_addr * addresses, int received)
   }
 }
 
-void send_icmps_with_ttl(int sockfd, struct sockaddr_in address, uint8_t ttl)
+void send_icmps_with_ttl(int sockfd, const struct sockaddr_in address, uint8_t ttl)
 {
   for (unsigned int i = 0; i < PER_TTL; i++)
   {
@@ -130,15 +130,15 @@ int receive_icmp(const int sockfd, uint8_t ttl, struct in_addr * address)
   return -1;
 }
 
-bool receive_icmps(int sockfd, uint8_t ttl, struct in_addr * received_addresses, size_t * received, time_t * avg)
+bool receive_icmps(int sockfd, uint8_t ttl, struct in_addr * received_addresses, int * received, time_t * avg)
 {
   *received = 0;
   bool reached = false;
   struct timespec start, lap;
   time_t total_time = 0;
   
-  clock_gettime(CLOCK_MONOTONIC, &start);
-  clock_gettime(CLOCK_MONOTONIC, &lap);
+  clock_gettime(CLOCK_REALTIME, &start);
+  clock_gettime(CLOCK_REALTIME, &lap);
   
   while (*received < PER_TTL)
   {
@@ -163,7 +163,7 @@ bool receive_icmps(int sockfd, uint8_t ttl, struct in_addr * received_addresses,
       (*received)++;
       total_time += elapsed_ms;
     }
-    clock_gettime(CLOCK_MONOTONIC, &lap);
+    clock_gettime(CLOCK_REALTIME, &lap);
   }
 
   if (*received > 0)
