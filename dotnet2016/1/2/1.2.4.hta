@@ -1,0 +1,48 @@
+<script language="VBScript">
+  Sub Window_onLoad
+    window.resizeTo 330, 200
+  End Sub
+</script>
+
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>1.2.4</title>
+  <script language="javascript">
+    function save_to_file()
+    {
+      var fs = new ActiveXObject("Scripting.FileSystemObject");
+      var path = document.getElementById('path').value;
+      var f = fs.CreateTextFile(path, true);
+
+      f.WriteLine("Imię: " + document.getElementById('first_name').value);
+      f.WriteLine("Nazwisko: " + document.getElementById('last_name').value);
+      f.WriteLine("Data urodzenia: " + document.getElementById('birthday').value);
+
+      f.Close();
+    }
+  </script>
+</head>
+<body>
+  <div>
+    <div>
+      Imię: 
+      <input type="text" id="first_name" />
+    </div>
+    <div>
+      Nazwisko: 
+      <input type="text" id="last_name" />
+    </div>
+    <div>
+      Urodziny: 
+      <input type="text" id="birthday" />
+    </div>
+    <div>
+      Ścieżka do pliku: 
+      <input type="text" id="path" />
+    </div>
+  </div>
+  <div>
+    <input type="button" onclick="save_to_file()" value="Zapisz"></td>
+  </div>
+</body>
