@@ -1,5 +1,4 @@
 ﻿#include <windows.h>
-#include <Strsafe.h>
 
 HKEY hkSoftware, hkSettings;
 DWORD dwDisposition;
@@ -13,12 +12,12 @@ char szClassName[] = "hjmjt6uhjfthujsdf";
 int WINAPI WinMain(HINSTANCE hThisInstance, HINSTANCE hPrevInstance, LPSTR lpszArgument, int nFunsterStil)
 {
   HWND hwnd;
-  MSG messages;        
-  WNDCLASSEX wincl;       
+  MSG messages;
+  WNDCLASSEX wincl;
 
   wincl.hInstance = hThisInstance;
   wincl.lpszClassName = szClassName;
-  wincl.lpfnWndProc = WindowProcedure;   
+  wincl.lpfnWndProc = WindowProcedure;
 
   wincl.style = CS_DBLCLKS;
   wincl.cbSize = sizeof(WNDCLASSEX);
@@ -33,23 +32,31 @@ int WINAPI WinMain(HINSTANCE hThisInstance, HINSTANCE hPrevInstance, LPSTR lpszA
   wincl.hbrBackground = (HBRUSH)GetStockObject(LTGRAY_BRUSH);
 
   if (!RegisterClassEx(&wincl)) return 0;
-  
-  RegOpenKeyEx(HKEY_CURRENT_USER, "Software", 0, KEY_ALL_ACCESS, &hkSoftware);
 
-  RegCreateKeyEx(hkSoftware, "Programowanie pod Windows", 0, NULL, REG_OPTION_NON_VOLATILE, KEY_ALL_ACCESS, NULL, &hkSettings, &dwDisposition);
+  LONG ret = RegOpenKeyEx(HKEY_CURRENT_USER, TEXT("Software"), 0, KEY_ALL_ACCESS, &hkSoftware);
+
+  /*
+  WCHAR * buf;
+  buf = LocalAlloc(NULL, 512);
+  FormatMessage(FORMAT_MESSAGE_FROM_SYSTEM, 0, ret, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), buf, 512, NULL);
+  //The system could not find the file specified
+  MessageBox(0, buf, 0, 0);
+  LocalFree(buf);
+  */
+
+  RegCreateKeyEx(hkSoftware, TEXT("Programowanie pod Windows"), 0, NULL, REG_OPTION_NON_VOLATILE, KEY_ALL_ACCESS, NULL, &hkSettings, &dwDisposition);
 
   if (dwDisposition == REG_CREATED_NEW_KEY)
   {
-    MessageBox(0, 0, 0, 0);
     width = 200;
     height = 200;
-    RegSetValueEx(hkSettings, "Width", 0, REG_DWORD, (BYTE *) &width, sizeof(width));
-    RegSetValueEx(hkSettings, "Height", 0, REG_DWORD, (BYTE *) &height, sizeof(height));
+    RegSetValueEx(hkSettings, TEXT("Width"), 0, REG_DWORD, (BYTE *)&width, sizeof(width));
+    RegSetValueEx(hkSettings, TEXT("Height"), 0, REG_DWORD, (BYTE *)&height, sizeof(height));
   }
 
   DWORD dwSize = sizeof(DWORD);
-  RegQueryValueEx(hkSettings, "Width", NULL, NULL, (LPBYTE) &width, &dwSize);
-  RegQueryValueEx(hkSettings, "Height", NULL, NULL, (LPBYTE) &height, &dwSize);
+  RegQueryValueEx(hkSettings, TEXT("Width"), NULL, NULL, (LPBYTE)&width, &dwSize);
+  RegQueryValueEx(hkSettings, TEXT("Height"), NULL, NULL, (LPBYTE)&height, &dwSize);
 
   hwnd = CreateWindowEx(
     0,
@@ -83,8 +90,8 @@ LRESULT CALLBACK WindowProcedure(HWND hwnd, UINT message, WPARAM wParam, LPARAM 
   case WM_SIZE:
     width = LOWORD(lParam);
     height = HIWORD(lParam);
-    RegSetValueEx(hkSettings, "Width", 0, REG_DWORD, (BYTE *) &width, sizeof(width));
-    RegSetValueEx(hkSettings, "Height", 0, REG_DWORD, (BYTE *) &height, sizeof(height));
+    RegSetValueEx(hkSettings, TEXT("Width"), 0, REG_DWORD, (BYTE *)&width, sizeof(width));
+    RegSetValueEx(hkSettings, TEXT("Height"), 0, REG_DWORD, (BYTE *)&height, sizeof(height));
     break;
   case WM_DESTROY:
     PostQuitMessage(0);
