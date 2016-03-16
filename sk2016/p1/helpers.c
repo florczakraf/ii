@@ -85,7 +85,7 @@ void send_icmps_with_ttl(int sockfd, const struct sockaddr_in address, uint8_t t
     to_send.type = ICMP_ECHO;
     to_send.code = 0;
     to_send.un.echo.id = getpid(); // later used to check if it is our
-    to_send.un.echo.sequence = (ttl << 8) | i; // so we know from which 'level of ttl' it came
+    to_send.un.echo.sequence = ttl; // so we know from which 'level of ttl' it came
     to_send.checksum = 0;
     to_send.checksum = compute_icmp_checksum((u_int16_t*)&to_send, sizeof(to_send));
 
@@ -101,7 +101,7 @@ int receive_icmp(const int sockfd, uint8_t ttl, struct in_addr * address)
 {
   int ret = recv(sockfd, buf, IP_MAXPACKET, MSG_DONTWAIT);
 
-  if (ret < 0 && (errno == EWOULDBLOCK || errno == EAGAIN))
+  if (ret < 0 && errno == EWOULDBLOCK)
     return -1;
   else
     err("Receiving packet", ret);
@@ -114,14 +114,14 @@ int receive_icmp(const int sockfd, uint8_t ttl, struct in_addr * address)
     struct ip * orig_ip_packet = (struct ip *)((uint8_t *)icmp_packet + ICMP_HEADER);
     struct icmp * orig_icmp_packet = (struct icmp *)((uint8_t *)orig_ip_packet + orig_ip_packet->ip_hl * 4);
 
-    if (orig_icmp_packet->icmp_id == getpid() && (orig_icmp_packet->icmp_seq >> 8) == ttl)
+    if (orig_icmp_packet->icmp_id == getpid() && orig_icmp_packet->icmp_seq == ttl)
     {
       // received packet from computer on route to target (time exceeded)
       *address = ip_packet->ip_src;
       return 1;
     }
   }
-  else if (icmp_packet->icmp_id == getpid() && (icmp_packet->icmp_seq >> 8) == ttl && icmp_packet->icmp_type == ICMP_ECHOREPLY)
+  else if (icmp_packet->icmp_id == getpid() && icmp_packet->icmp_seq == ttl && icmp_packet->icmp_type == ICMP_ECHOREPLY)
   {
     // received packet from target
     *address = ip_packet->ip_src;
