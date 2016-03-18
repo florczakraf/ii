@@ -2,8 +2,6 @@
 
 #include "helpers.h"
 
-static u_int8_t buf[IP_MAXPACKET + 1];
-
 void error(const char * message, int value)
 {
   if (value < 0)
@@ -101,6 +99,7 @@ void send_icmps_with_ttl(const int sockfd, const struct sockaddr_in address, con
 // -1 - not interesting packet (wrong pid or ttl) or received nothing
 int receive_icmp(const const int sockfd, const u_int8_t ttl, struct in_addr * address)
 {
+  u_int8_t buf[IP_MAXPACKET + 1];
   int ret = recv(sockfd, buf, IP_MAXPACKET, MSG_DONTWAIT);
 
   if (ret < 0 && errno == EWOULDBLOCK)
