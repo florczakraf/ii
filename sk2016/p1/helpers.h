@@ -4,34 +4,29 @@
 #define TTL_MAX 30
 #define PER_TTL 3
 #define TIMEOUT 1000
-
-//
 #define ICMP_HEADER 8
 
-//
-
-#include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <sys/types.h>
 #include <time.h>
-#include <sys/socket.h>
-#include <netinet/ip.h>
-#include <netinet/ip_icmp.h>
-#include <netinet/in.h>
-#include <arpa/inet.h>
+#include <errno.h>
 #include <assert.h>
 #include <stdbool.h>
 #include <unistd.h>
 #include <stdint.h>
 #include <inttypes.h>
+#include <sys/socket.h>
+#include <arpa/inet.h>
+#include <netinet/ip.h>
+#include <netinet/ip_icmp.h>
+#include <netinet/in.h>
 
-void err(const char * msg, int val);
+void error(const char * message, int value);
 u_int16_t compute_icmp_checksum (const void * buff, int length);
-void traceroute(int sockfd, struct sockaddr_in address);
-void print_addresses(struct in_addr * addresses, int received);
-void send_icmps_with_ttl(int sockfd, const struct sockaddr_in address, uint8_t ttl);
-bool receive_icmps(int sockfd, uint8_t ttl, struct in_addr * received_addresses, int * received, time_t * avg);
+void traceroute(const int sockfd, const struct sockaddr_in address);
+void print_addresses(struct in_addr * addresses, const int received);
+void send_icmps_with_ttl(const int sockfd, const struct sockaddr_in address, const u_int8_t ttl);
+bool receive_icmps(const int sockfd, const u_int8_t ttl, struct in_addr * received_addresses, int * received, time_t * avg);
 
 #endif

@@ -1,12 +1,14 @@
+// Rafal Florczak 265304
+
 #include "helpers.h"
 
-static uint8_t buf[IP_MAXPACKET];
+static u_int8_t buf[IP_MAXPACKET + 1];
 
-void err(const char * msg, int val)
+void error(const char * message, int value)
 {
-  if (val < 0)
+  if (value < 0)
   {
-    fprintf(stderr, "%s: (%d) %s\n", msg, errno, strerror(errno));
+    fprintf(stderr, "%s: (%d) %s\n", message, errno, strerror(errno));
     exit(1);
   }
 
@@ -15,26 +17,14 @@ void err(const char * msg, int val)
   #endif
 }
 
-// checksum function by ~mbi
-u_int16_t compute_icmp_checksum (const void * buff, int length)
-{
-  u_int32_t sum;
-  const u_int16_t * ptr = buff;
-  assert (length % 2 == 0);
-  for (sum = 0; length > 0; length -= 2)
-    sum += * ptr++;
-  sum = (sum >> 16) + (sum & 0xffff);
-  return (u_int16_t)(~(sum + (sum >> 16)));
-}
-
-void traceroute(int sockfd, struct sockaddr_in address)
+void traceroute(const int sockfd, const struct sockaddr_in address)
 {
   struct in_addr received_addresses[PER_TTL];
   int received;
   time_t avg;
   bool reached = false;
   
-  for (uint8_t ttl = 1; ttl <= TTL_MAX; ttl++)
+  for (u_int8_t ttl = 1; ttl <= TTL_MAX; ttl++)
   {
     send_icmps_with_ttl(sockfd, address, ttl);
     reached = receive_icmps(sockfd, ttl, received_addresses, &received, &avg);
@@ -56,8 +46,7 @@ int addr_cmp(const void * l, const void * r)
   return ((struct in_addr *)l)->s_addr - ((struct in_addr *)r)->s_addr;
 }
   
-
-void print_addresses(struct in_addr * addresses, int received)
+void print_addresses(struct in_addr * addresses, const int received)
 {
   qsort(addresses, received, sizeof(* addresses), addr_cmp);
   
@@ -77,7 +66,19 @@ void print_addresses(struct in_addr * addresses, int received)
   }
 }
 
-void send_icmps_with_ttl(int sockfd, const struct sockaddr_in address, uint8_t ttl)
+// checksum function by ~mbi
+u_int16_t compute_icmp_checksum (const void * buff, int length)
+{
+  u_int32_t sum;
+  const u_int16_t * ptr = buff;
+  assert (length % 2 == 0);
+  for (sum = 0; length > 0; length -= 2)
+    sum += * ptr++;
+  sum = (sum >> 16) + (sum & 0xffff);
+  return (u_int16_t)(~(sum + (sum >> 16)));
+}
+
+void send_icmps_with_ttl(const int sockfd, const struct sockaddr_in address, const u_int8_t ttl)
 {
   for (unsigned int i = 0; i < PER_TTL; i++)
   {
@@ -87,32 +88,33 @@ void send_icmps_with_ttl(int sockfd, const struct sockaddr_in address, uint8_t t
     to_send.un.echo.id = getpid(); // later used to check if it is our
     to_send.un.echo.sequence = ttl; // so we know from which 'level of ttl' it came
     to_send.checksum = 0;
-    to_send.checksum = compute_icmp_checksum((u_int16_t*)&to_send, sizeof(to_send));
+    to_send.checksum = compute_icmp_checksum((u_int16_t *)&to_send, sizeof(to_send));
 
-    err("Setting ttl", setsockopt(sockfd, IPPROTO_IP, IP_TTL, &ttl, sizeof(ttl)));
-    err("Sending packet", sendto(sockfd, &to_send, 8, 0, &address, sizeof(address)));
+    error("Setting ttl", setsockopt(sockfd, IPPROTO_IP, IP_TTL, &ttl, sizeof(ttl)));
+    error("Sending packet", sendto(sockfd, &to_send, 8, 0, (struct sockaddr *)&address, sizeof(address)));
   }
 }
 
-// 0 - received packet from target
-// 1 - received packet but not from target
-// -1 - non interesting packet (wrong pid or ttl) or nothing to report
-int receive_icmp(const int sockfd, uint8_t ttl, struct in_addr * address)
+// Returns:
+//  0 - received packet from target
+//  1 - received packet but not from target
+// -1 - not interesting packet (wrong pid or ttl) or received nothing
+int receive_icmp(const const int sockfd, const u_int8_t ttl, struct in_addr * address)
 {
   int ret = recv(sockfd, buf, IP_MAXPACKET, MSG_DONTWAIT);
 
   if (ret < 0 && errno == EWOULDBLOCK)
     return -1;
   else
-    err("Receiving packet", ret);
+    error("Receiving packet", ret);
 
   struct ip * ip_packet = (struct ip *) buf;
-  struct icmp * icmp_packet = (struct icmp *)((uint8_t *)ip_packet + ip_packet->ip_hl * 4);
+  struct icmp * icmp_packet = (struct icmp *)((u_int8_t *)ip_packet + ip_packet->ip_hl * 4);
 
   if (icmp_packet->icmp_type == ICMP_TIME_EXCEEDED && icmp_packet->icmp_code == ICMP_EXC_TTL)
   {
-    struct ip * orig_ip_packet = (struct ip *)((uint8_t *)icmp_packet + ICMP_HEADER);
-    struct icmp * orig_icmp_packet = (struct icmp *)((uint8_t *)orig_ip_packet + orig_ip_packet->ip_hl * 4);
+    struct ip * orig_ip_packet = (struct ip *)((u_int8_t *)icmp_packet + ICMP_HEADER);
+    struct icmp * orig_icmp_packet = (struct icmp *)((u_int8_t *)orig_ip_packet + orig_ip_packet->ip_hl * 4);
 
     if (orig_icmp_packet->icmp_id == getpid() && orig_icmp_packet->icmp_seq == ttl)
     {
@@ -130,7 +132,7 @@ int receive_icmp(const int sockfd, uint8_t ttl, struct in_addr * address)
   return -1;
 }
 
-bool receive_icmps(int sockfd, uint8_t ttl, struct in_addr * received_addresses, int * received, time_t * avg)
+bool receive_icmps(const int sockfd, const u_int8_t ttl, struct in_addr * received_addresses, int * received, time_t * avg)
 {
   *received = 0;
   bool reached = false;
@@ -166,8 +168,8 @@ bool receive_icmps(int sockfd, uint8_t ttl, struct in_addr * received_addresses,
     clock_gettime(CLOCK_REALTIME, &lap);
   }
 
-  if (*received > 0)
-    *avg = total_time / *received;
+  if (*received == PER_TTL)
+    *avg = total_time / PER_TTL;
   
   return reached;
 }

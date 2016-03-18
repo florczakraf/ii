@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS=-std=c99 -Wall -W -D_GNU_SOURCE
+CFLAGS=-std=gnu99 -Wall -W
 
 traceroute: traceroute.o helpers.o
 	$(CC) $(CFLAGS) -o $@ $^
