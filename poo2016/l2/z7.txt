@@ -1,0 +1,53 @@
+public class Student
+{
+  UsosWebPage page;
+  public void foo()
+  {
+    page.show()
+  }
+}
+
+public class UsosWebPage
+{
+  GradeController controller;
+  PageLayout pageLayout;
+  public void show()
+  {
+    pageLayout = controller.getStudentGradeInfo();
+  }
+}
+
+public class GradeController
+{
+  Student student;
+  public PageLayout getStudentGradeInfo()
+  {
+    pageLayout = new PageLayout(); // ??
+    Mark mark; // ?? int?
+    courses = student.getCourses();
+    for (Course course : courses)
+    {
+      mark = course.getMark(student);
+      // tu pewnie coś z pageLayout
+    }
+    return pageLayout;
+  }
+}
+
+public class Student
+{
+  public course[] getCourses(){}
+}
+
+public class Course
+{
+  public Mark getMark()
+  {
+    // jakieś wywołanie getValue()
+  }
+  
+  private apaapa getValue(){}
+}
+
+// "Nic" nie wiadomo. Jakie są typy, co się dzieje po drodze. Nie wiemy nawet
+// skąd Student wywołuje show().
