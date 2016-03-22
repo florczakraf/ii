@@ -1,4 +1,4 @@
-public class Student
+public class Student // ?? Nie wiemy
 {
   UsosWebPage page;
   public void foo()
