@@ -1,0 +1,14 @@
+ Single Responsibility Principle - (zasada pojedynczej odpowiedzialności)
+     =
+ Klasa nie może być modyfikowana z więcej niż jednego powodu
+
+ Interface Segregation Principle
+     =
+ Użytkownik chcąc zaimplementować interfejs nie powinien implementować metod, których nie potrzebuje
+
+Różnica między SRP i ISP jest taka, że interfejs może mieć wszystkie metody o tej samej funkjonalności,
+a mimo to nie wszystkie musimy chcieć zaimplementować w naszej klasie (czasami je potrzebujemy, a czasami nie),
+dlatego rozdzielamy go na więcej interfejsów.
+
+Natomiast klasa nie spełnia SRP, jeśli ma kilka odpowiedzialności (metody o różnej funkcjonalności),
+powinniśmy wtedy stworzyć dodatkowe klasy.

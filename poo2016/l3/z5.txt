@@ -1,0 +1,13 @@
+https://docs.oracle.com/javase/7/docs/api/java/util/Iterator.html
+
+interface Iterator<E>
+{
+  boolean hasNext();
+  E next();
+  void remove();
+}
+
+Łamie ISP, bo nie każdy musi potrzebować metody remove(), która usuwa ostatnio zwrócony element przez iterator.
+
+Jak sobie z tym poradzić? Można stworzyć interfejs bez tej metody i interfejs z niego dziedziczący, który zawierałby
+tę metodę.
