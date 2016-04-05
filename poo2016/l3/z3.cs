@@ -103,6 +103,7 @@ class CashRegister
     return _price;
   }
   
+  // 1.
   public void PrintBill(Item[] items, string order = "")
   {
     switch(order)
@@ -120,6 +121,32 @@ class CashRegister
         _PrintItems(items);
         break;
     }
+  }
+  
+
+  // 2.
+  public void PrintBill(Item[] items)
+  {
+    _PrintItems(items);
+  }
+
+  public void PrintBillAlphabetically(Item[] items)
+  {
+    // sort
+    _PrintItems(items);
+  }
+
+  public void PrintBillByCategory(Item[] items)
+  {
+    // sort
+    _PrintItems(items);
+  }
+
+  // 3.
+  public void PrintBill(Item[] items, ISorter sorter)
+  {
+    // sort przy użyciu sortera
+    _PrintItems();
   }
   
   private void _PrintItems(Item[] items)
