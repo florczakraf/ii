@@ -74,3 +74,5 @@
 (deriv 'x 'x)
 (deriv 'y 'x)
 (deriv '(* (+ 3.4 5) (* x x)) 'x)
+
+(deriv '(* 2 (* 6 (* x x))) 'x)
