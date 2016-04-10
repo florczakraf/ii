@@ -6,7 +6,7 @@ class B  // Creator
   
   public B()
   {
-    a = A();
+    a = new A();
   }
 }
 

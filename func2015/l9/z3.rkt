@@ -113,14 +113,16 @@
 
 ;testy
 
-(define test1 (mk-mobile (mk-branch 5 (mk-mobile (mk-branch 2 (mk-mobile (mk-branch 4 6) (mk-branch 1 1))) (mk-branch 2 1))) (mk-branch 4 10)))
+(define test1 (mk-mobile (mk-branch 5 (mk-mobile (mk-branch 2 (mk-mobile (mk-branch 4 6)
+                                                                         (mk-branch 1 1)))
+                                                 (mk-branch 2 1))) (mk-branch 4 10)))
 (define bal (mk-mobile (mk-branch 1 1) (mk-branch 1 1)))
 (define bal2 (mk-mobile (mk-branch 3 bal) (mk-branch 3 bal)))
 
-(= (weight test1) 6)
+(= (weight test1) 18)
 (= (weight bal) 2)
 (eq? (balanced? test1) #f)
 (eq? (balanced? bal) #t)
 (eq? (balanced? bal2) #t)
 
-(draw test1)
+(draw bal)
