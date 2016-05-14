@@ -19,13 +19,13 @@
 #include <sys/socket.h>
 #include <arpa/inet.h>
 #include <netinet/ip.h>
-#include <netinet/ip_icmp.h>
-#include <netinet/in.h>
+#include <sys/time.h>
+#include <sys/types.h>
 
 void error(const char * message, int value);
 void fail(const char * message);
-int send_requests(const int sockfd, const struct sockaddr_in addr, bool * received, const int file_size, const int parts);
-void receive_file(const int sockfd, const struct sockaddr_in addr, bool * received, const int parts, char * buffer);
+bool send_requests(const int sockfd, const struct sockaddr_in addr, bool * received, const int file_size, const int parts);
+void receive_file(const int sockfd, const struct sockaddr_in addr, bool * received, char * buffer);
 
 
 #endif

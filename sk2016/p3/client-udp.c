@@ -50,14 +50,14 @@ void download_file(const int sockfd, const struct sockaddr_in addr, const char *
 
   while (send_requests(sockfd, addr, received, file_size, parts))
   {
-    receive_file(sockfd, addr, received, parts, buffer);
+    receive_file(sockfd, addr, received, buffer);
 
     int count = 0;
     for (int i = 0; i < parts; i++)
       if (received[i])
 	count++;
 
-    printf("%4.2f%% done\n", count * 100.0 / parts );
+    printf("%4.2f%% done\n", count * 100.0 / parts);
   }
 
   FILE * f = fopen(file_name, "w");
